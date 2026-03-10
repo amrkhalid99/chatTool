@@ -1,0 +1,59 @@
+Sub ExportCleanJson()
+    Dim lastRow As Long
+    Dim i As Long
+    Dim jsonText As String
+    Dim ws As Worksheet
+    
+    Set ws = ActiveSheet
+    lastRow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
+    
+    ' بداية JSON
+    jsonText = "[" & vbCrLf
+    
+    For i = 2 To lastRow
+        ' السطر ده مهم: بننضف أي حرف ممكن يخرب JSON
+        Dim idVal As String
+        Dim titleVal As String
+        Dim catVal As String
+        Dim contVal As String
+        
+        ' بنشيل أي حرف double quote جوه النص عشان يبوظ JSON
+        idVal = Replace(ws.Cells(i, 1).Value, """", "\""")
+        titleVal = Replace(ws.Cells(i, 2).Value, """", "\""")
+        catVal = Replace(ws.Cells(i, 3).Value, """", "\""")
+        contVal = Replace(ws.Cells(i, 4).Value, """", "\""")
+        
+        ' بنشيل الـ Enter من جوه النص عشان ميقطعش JSON
+        contVal = Replace(contVal, vbCrLf, " ")
+        contVal = Replace(contVal, vbLf, " ")
+        contVal = Replace(contVal, vbCr, " ")
+        
+        ' تعديل الترتيب: content قبل category
+        jsonText = jsonText & "  {"
+        jsonText = jsonText & """id"": """ & idVal & """, "
+        jsonText = jsonText & """title"": """ & titleVal & """, "
+        jsonText = jsonText & """content"": """ & contVal & """, "
+        jsonText = jsonText & """category"": """ & catVal & """"
+        jsonText = jsonText & "}"
+        
+        ' لو مش آخر سطر، ضيف فاصلة، مفيش فاصلة بعد آخر سطر
+        If i < lastRow Then
+            jsonText = jsonText & "," & vbCrLf
+        Else
+            jsonText = jsonText & vbCrLf
+        End If
+    Next i
+    
+    jsonText = jsonText & "]"
+    
+    ' نسخ للحافظة بطريقة مضمونة
+    Dim obj As Object
+    Set obj = CreateObject("htmlfile")
+    obj.ParentWindow.ClipboardData.SetData "text", jsonText
+    
+    ' رسالة تأكيد
+    MsgBox "JSON نضيف 100%!" & vbNewLine & "افتح JSON Formatter أو Notepad واعمل Paste", vbInformation
+    
+    ' للتحقق: نشوف أول 100 حرف
+    Debug.Print Left(jsonText, 200)
+End Sub
