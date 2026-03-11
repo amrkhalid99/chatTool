@@ -16,12 +16,27 @@ Sub ExportCleanJson()
         Dim titleVal As String
         Dim catVal As String
         Dim contVal As String
+        Dim pinnedVal As String
         
         ' بنشيل أي حرف double quote جوه النص عشان يبوظ JSON
         idVal = Replace(ws.Cells(i, 1).Value, """", "\""")
         titleVal = Replace(ws.Cells(i, 2).Value, """", "\""")
         catVal = Replace(ws.Cells(i, 3).Value, """", "\""")
         contVal = Replace(ws.Cells(i, 4).Value, """", "\""")
+        
+        ' الخانة الخامسة (pinned) - بنحولها لقيمة boolean
+        If i <= lastRow And ws.Cells(i, 5).Value <> "" Then
+            ' لو مكتوب TRUE أو YES أو 1 أو أي حاجة إيجابية
+            Dim pinValue As String
+            pinValue = LCase(Trim(ws.Cells(i, 5).Value))
+            If pinValue = "true" Or pinValue = "yes" Or pinValue = "1" Or pinValue = "صح" Or pinValue = "نعم" Then
+                pinnedVal = "true"
+            Else
+                pinnedVal = "false"
+            End If
+        Else
+            pinnedVal = "false"  ' افتراضي false لو الخلية فاضية
+        End If
         
         ' بنشيل الـ Enter من جوه النص عشان ميقطعش JSON
         contVal = Replace(contVal, vbCrLf, " ")
@@ -33,7 +48,8 @@ Sub ExportCleanJson()
         jsonText = jsonText & """id"": """ & idVal & """, "
         jsonText = jsonText & """title"": """ & titleVal & """, "
         jsonText = jsonText & """content"": """ & contVal & """, "
-        jsonText = jsonText & """category"": """ & catVal & """"
+        jsonText = jsonText & """category"": """ & catVal & """, "
+        jsonText = jsonText & """pinned"": " & pinnedVal & ""  ' هنا بدون علامات اقتباس لأنها boolean
         jsonText = jsonText & "}"
         
         ' لو مش آخر سطر، ضيف فاصلة، مفيش فاصلة بعد آخر سطر

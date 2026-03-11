@@ -6,17 +6,18 @@
     <title>⚡ FAST REPLY · saved replies hub</title>
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Inter modern sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Rubik + Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Rubik', 'Roboto', sans-serif;
         }
 
-        /* CSS variables – light mode default */
         :root {
             --bg: #f6f9fc;
             --surface: #ffffff;
@@ -34,7 +35,6 @@
             --pinned-star: #fbbf24;
         }
 
-        /* dark mode class */
         body.dark {
             --bg: #0f172a;
             --surface: #1e293b;
@@ -53,292 +53,342 @@
             color: var(--text-primary);
             transition: background-color 0.2s, color 0.2s;
             min-height: 100vh;
-            padding: 2rem 1.5rem;
+            padding: 1rem;
             line-height: 1.5;
         }
 
         .container {
-            max-width: 1440px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
-        /* header + top bar */
-        .top-bar {
+        /* Nav Bar */
+        .nav-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 1.5rem;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: 1rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
         .logo h1 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             background: linear-gradient(145deg, var(--accent), #7c3aed);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
+            white-space: nowrap;
         }
-        .logo small {
-            font-size: 0.85rem;
+
+        /* Search in Nav */
+        .nav-search {
+            display: flex;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 0.4rem 1rem;
+            align-items: center;
+            gap: 8px;
+            min-width: 280px;
+        }
+
+        .nav-search i {
             color: var(--text-secondary);
-            margin-left: 8px;
-            font-weight: 400;
-            background: none;
-            -webkit-text-fill-color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .nav-search input {
+            background: transparent;
+            border: none;
+            width: 100%;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .nav-search input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .clear-search-nav {
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .clear-search-nav:hover {
+            color: var(--danger);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .theme-toggle {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 40px;
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 1rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
             transition: 0.2s;
-            box-shadow: var(--card-shadow);
-        }
-        .theme-toggle i {
-            font-size: 1.2rem;
-            color: var(--accent);
-        }
-
-        /* stats cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        .stat-card {
-            background: var(--surface);
-            border-radius: 20px;
-            padding: 1.3rem 1.5rem;
-            border: 1px solid var(--border);
-            box-shadow: var(--card-shadow);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .stat-icon {
-            background: var(--accent-soft);
-            width: 48px;
-            height: 48px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 1.7rem;
-        }
-        .stat-content h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        .stat-content p {
-            color: var(--text-secondary);
             font-size: 0.9rem;
-            font-weight: 500;
         }
 
-        /* search + filters */
-        .action-bar {
+        .stats-mini {
             display: flex;
-            flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 1.8rem;
-            align-items: center;
-        }
-        .search-wrapper {
-            flex: 3;
-            min-width: 280px;
-            display: flex;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 60px;
-            padding: 0.5rem 1.5rem;
-            align-items: center;
-            gap: 10px;
-            box-shadow: var(--card-shadow);
-        }
-        .search-wrapper i {
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            font-size: 1.2rem;
         }
-        .search-wrapper input {
-            background: transparent;
-            border: none;
-            width: 100%;
-            font-size: 1rem;
-            padding: 0.6rem 0;
-            color: var(--text-primary);
-            outline: none;
-        }
-        .filter-group {
+
+        .stats-mini span {
             display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            flex: 2;
-            justify-content: flex-end;
+            align-items: center;
+            gap: 0.3rem;
         }
-        .filter-select, .btn {
-            padding: 0.7rem 1.4rem;
-            border-radius: 40px;
+
+        /* Action Buttons in Nav */
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
             border: 1px solid var(--border);
             background: var(--surface);
             color: var(--text-primary);
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: 0.15s;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            box-shadow: var(--card-shadow);
+            gap: 0.5rem;
+            white-space: nowrap;
         }
+
         .btn-primary {
             background: var(--accent);
             border-color: var(--accent);
             color: white;
         }
-        .btn-primary i {
-            color: white;
-        }
+
         .btn:hover {
             background: var(--surface-hover);
         }
+
         .btn-primary:hover {
             background: #1d4ed8;
         }
 
-        /* replies grid */
+        /* Compact Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .stat-icon {
+            background: var(--accent-soft);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        .stat-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .stat-content p {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        /* Category Pills */
+        .category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            align-items: center;
+        }
+
+        .category-pill {
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-pill:hover {
+            background: var(--surface-hover);
+            border-color: var(--accent);
+        }
+
+        .category-pill.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .category-pill.all-pill {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+        }
+
+        /* Replies Grid - Responsive */
         .replies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.2rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
         }
+
         .reply-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 1.3rem 1.3rem 1rem 1.3rem;
+            border-radius: 12px;
+            padding: 1rem;
             box-shadow: var(--card-shadow);
-            transition: transform 0.1s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
+            transition: all 0.2s;
             cursor: pointer;
             position: relative;
         }
+
         .reply-card:hover {
             box-shadow: var(--shadow);
             border-color: var(--accent);
+            transform: translateY(-2px);
         }
+
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
+
         .title-section {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
             flex-wrap: wrap;
+            flex: 1;
         }
+
         .pinned-icon {
             color: var(--pinned-star);
-            font-size: 1.1rem;
-            filter: drop-shadow(0 2px 4px rgba(251,191,36,0.3));
+            font-size: 1rem;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
         }
+
+        .pinned-icon:hover {
+            transform: scale(1.1);
+        }
+
         .reply-title {
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: -0.3px;
+            font-weight: 600;
+            font-size: 1rem;
+            font-weight: normal;
             color: var(--text-primary);
+            padding-right: 1.5rem;
         }
+
         .category-badge {
             background: var(--accent-soft);
             color: var(--accent);
-            padding: 0.3rem 0.9rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
             font-weight: 600;
-            text-transform: capitalize;
         }
+
         .reply-content {
             background: var(--bg);
-            padding: 0.9rem 1rem;
-            border-radius: 16px;
-            margin: 10px 0 15px 0;
-            font-size: 0.95rem;
-            border-left: 3px solid var(--accent);
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-size: 0.9rem;
+            font-weight: 600;
             color: var(--text-primary);
             word-break: break-word;
-            max-height: 120px;
+            max-height: 100px;
             overflow-y: auto;
-            line-height: 1.6;
+            line-height: 1.5;
             border: 1px solid var(--border);
         }
+
         .card-footer {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-            margin-top: 6px;
+            margin-top: 8px;
         }
+
         .usage-info {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
+            gap: 4px;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             background: var(--surface-hover);
-            padding: 0.3rem 1rem;
+            padding: 0.2rem 0.8rem;
             border-radius: 30px;
-        }
-        .card-actions {
-            display: flex;
-            gap: 8px;
-        }
-        .card-actions button {
-            background: transparent;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            padding: 6px 8px;
-            border-radius: 30px;
-            transition: 0.1s;
-            display: flex;
-            align-items: center;
-        }
-        .copy-btn {
-            background: var(--accent) !important;
-            color: white !important;
-            padding: 0.5rem 1.2rem !important;
-            gap: 0.4rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        .copy-btn i {
-            font-size: 1rem;
-        }
-        .card-actions button:hover {
-            background: var(--surface-hover);
-            color: var(--accent);
-        }
-        .copy-btn:hover {
-            background: #1d4ed8 !important;
-        }
-        .star-btn.active {
-            color: var(--pinned-star);
         }
 
-        /* modals + toast */
+        /* Modal */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -352,32 +402,38 @@
             opacity: 0;
             transition: 0.2s;
         }
+
         .modal-overlay.show {
             visibility: visible;
             opacity: 1;
         }
+
         .modal {
             background: var(--surface);
-            border-radius: 32px;
+            border-radius: 16px;
             width: 90%;
             max-width: 500px;
-            padding: 2rem;
+            padding: 1.5rem;
             border: 1px solid var(--border);
             box-shadow: var(--shadow);
         }
+
         .modal h2 {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
+
         .modal input, .modal textarea, .modal select {
             width: 100%;
-            padding: 0.9rem 1rem;
-            border-radius: 20px;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
             border: 1px solid var(--border);
             background: var(--bg);
             color: var(--text-primary);
             margin-bottom: 1rem;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
+
         .modal-actions {
             display: flex;
             gap: 1rem;
@@ -391,7 +447,7 @@
             background: var(--surface);
             border-left: 6px solid var(--success);
             padding: 1rem 2rem;
-            border-radius: 40px;
+            border-radius: 8px;
             box-shadow: var(--shadow);
             font-weight: 500;
             display: flex;
@@ -402,123 +458,172 @@
             z-index: 1200;
             border: 1px solid var(--border);
         }
+
         .toast.show {
             transform: translateY(0);
-        }
-
-        .hotkey-hint {
-            font-size: 0.75rem;
-            background: var(--accent-soft);
-            padding: 0.2rem 0.7rem;
-            border-radius: 20px;
         }
 
         hr {
             border: 0.5px solid var(--border);
             margin: 1.5rem 0 1rem;
         }
+
+        @media (max-width: 1024px) {
+            .nav-left {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+                width: 100%;
+            }
+            
+            .nav-search {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-actions {
+                justify-content: space-between;
+            }
+            
+            .replies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- top bar + theme toggle -->
-    <div class="top-bar">
-        <div class="logo">
-            <h1>⚡ FAST REPLY <small>ultimate saved replies</small></h1>
+    <!-- Nav Bar -->
+    <div class="nav-bar">
+        <div class="nav-left">
+            <div class="logo">
+                <h1>⚡ FAST REPLY</h1>
+            </div>
+            
+            <!-- Search in Nav Bar -->
+            <div class="nav-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search replies... (Ctrl+F)" autofocus>
+                <i class="fas fa-times clear-search-nav" id="clearSearch"></i>
+            </div>
         </div>
-        <div class="theme-toggle" id="themeToggle">
-            <i class="fas fa-sun"></i>
-            <span>Dark / Light</span>
-            <i class="fas fa-moon"></i>
+        
+        <div class="nav-actions">
+            <div class="stats-mini">
+                <span><i class="fas fa-message"></i> <span id="totalRepliesMini">0</span></span>
+                <span><i class="fas fa-star" style="color: var(--pinned-star);"></i> <span id="pinnedCountMini">0</span></span>
+                <span><i class="fas fa-copy"></i> <span id="totalClicksMini">0</span></span>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn" id="importBtn" title="Import JSON"><i class="fas fa-upload"></i> Import</button>
+                <button class="btn" id="exportBtn" title="Export JSON"><i class="fas fa-download"></i> Export</button>
+                <button class="btn btn-primary" id="addReplyBtn"><i class="fas fa-plus"></i> New</button>
+            </div>
+            
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+                <span>🌓</span>
+            </div>
         </div>
     </div>
 
-    <!-- stats cards -->
-    <div class="stats-grid" id="statsGrid">
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-message"></i></div><div class="stat-content"><h3 id="totalReplies">0</h3><p>total replies</p></div></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-star" style="color: var(--pinned-star);"></i></div><div class="stat-content"><h3 id="pinnedCount">0</h3><p>pinned</p></div></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line"></i></div><div class="stat-content"><h3 id="totalClicks">0</h3><p>total copies</p></div></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fas fa-fire"></i></div><div class="stat-content"><h3 id="mostUsed">-</h3><p>most used</p></div></div>
-    </div>
+    <!-- Hidden file input -->
+    <input type="file" id="importFile" accept="application/json" style="display: none;">
 
-    <!-- search, filter, add buttons -->
-    <div class="action-bar">
-        <div class="search-wrapper">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Search by title or content... (Ctrl+F)" autofocus>
+    <!-- Compact Stats -->
+    <!-- <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-message"></i></div>
+            <div class="stat-content">
+                <h3 id="totalReplies">0</h3>
+                <p>total replies</p>
+            </div>
         </div>
-        <div class="filter-group">
-            <select id="categoryFilter" class="filter-select">
-                <option value="all">🏷️ All categories</option>
-            </select>
-            <button class="btn" id="exportBtn"><i class="fas fa-download"></i> Export</button>
-            <button class="btn btn-primary" id="addReplyBtn"><i class="fas fa-plus"></i> New reply</button>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-star" style="color: var(--pinned-star);"></i></div>
+            <div class="stat-content">
+                <h3 id="pinnedCount">0</h3>
+                <p>pinned</p>
+            </div>
         </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-copy"></i></div>
+            <div class="stat-content">
+                <h3 id="totalClicks">0</h3>
+                <p>total copies</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-fire"></i></div>
+            <div class="stat-content">
+                <h3 id="mostUsed">-</h3>
+                <p>most used</p>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Category Pills -->
+    <div class="category-pills" id="categoryPills">
+        <!-- All pill will always be first via JS -->
     </div>
 
-    <!-- quick hotkey hint (1-9) -->
-    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
-        <span class="hotkey-hint"><i class="far fa-keyboard"></i> 1...9 keys copy first 9 cards</span>
-        <span class="hotkey-hint"><i class="fas fa-thumbtack"></i> click star to pin</span>
-    </div>
-
-    <!-- replies grid -->
+    <!-- Replies Grid -->
     <div id="repliesContainer" class="replies-grid"></div>
-    <hr>
-    <!-- tiny footer / import -->
-    <div style="display: flex; justify-content: flex-end; gap: 1rem;">
-        <button class="btn" id="importBtn"><i class="fas fa-upload"></i> Import JSON</button>
-        <input type="file" id="importFile" accept="application/json" style="display: none;">
-    </div>
 </div>
 
-<!-- toast for copy -->
+<!-- Toast -->
 <div id="toast" class="toast"><i class="fas fa-check-circle" style="color: var(--success);"></i> <span>Copied to clipboard!</span></div>
 
-<!-- add/edit modal -->
+<!-- Modal -->
 <div class="modal-overlay" id="replyModal">
     <div class="modal">
         <h2 id="modalTitle">➕ Add new reply</h2>
-        <input type="text" id="modalTitleInput" placeholder="Title (e.g. Greeting)" autocomplete="off">
-        <textarea id="modalContentInput" rows="4" placeholder="Reply text... you can use {name} later"></textarea>
-        <input type="text" id="modalCategoryInput" placeholder="Category (e.g. support, sales)">
+        <input type="text" id="modalTitleInput" placeholder="Title" autocomplete="off">
+        <textarea id="modalContentInput" rows="4" placeholder="Reply text..."></textarea>
+        <input type="text" id="modalCategoryInput" placeholder="Category">
         <div class="modal-actions">
             <button class="btn" id="modalCancel">Cancel</button>
-            <button class="btn btn-primary" id="modalSave">Save reply</button>
+            <button class="btn btn-primary" id="modalSave">Save</button>
         </div>
     </div>
 </div>
 
 <script>
     (function() {
-        // ---------- DATA (initial 120+ style, but we'll keep sample + expandable) ----------
         const STORAGE_KEY = 'fastReplyData';
-        // Default sample data (will be extended if localStorage empty)
+        
+        // Sample data
         const defaultReplies = [
-            { id: '1', title: '👋 Welcome greeting', content: 'Hello! Thank you for contacting support. How may I assist you today?', category: 'support', usageCount: 24, pinned: true, createdAt: Date.now() - 100000 },
+            { id: '1', title: '👋 Welcome', content: 'Hello! Thank you for contacting support. How may I assist you today?', category: 'support', usageCount: 24, pinned: true, createdAt: Date.now() - 100000 },
+            { id: '2', title: '📦 Order', content: 'Your order #{order} is being processed.', category: 'orders', usageCount: 18, pinned: false, createdAt: Date.now() - 200000 },
+            { id: '3', title: '🤝 Thanks', content: 'Thanks for reaching out! Have a wonderful day 😊', category: 'friendly', usageCount: 42, pinned: true, createdAt: Date.now() - 50000 },
         ];
-        // generate more up to 120 quickly (just for bulk demo)
-        for (let i = 11; i <= 35; i++) {
-            defaultReplies.push({ id: i.toString(), title: `Template reply #${i}`, content: `Sample fast reply number ${i} with some dynamic text.`, category: i % 3 === 0 ? 'sales' : (i % 3 === 1 ? 'support' : 'other'), usageCount: Math.floor(Math.random() * 20), pinned: i % 5 === 0, createdAt: Date.now() - i * 10000 });
-        }
 
-        // load or init data
+        // Load data
         let replies = [];
         try {
             const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored) {
-                replies = JSON.parse(stored);
-            } else {
-                replies = defaultReplies;
-            }
+            replies = stored ? JSON.parse(stored) : defaultReplies;
         } catch (e) {
             replies = defaultReplies;
         }
 
-        // references
+        // DOM elements
         const container = document.getElementById('repliesContainer');
         const searchInput = document.getElementById('searchInput');
-        const categoryFilter = document.getElementById('categoryFilter');
+        const clearSearch = document.getElementById('clearSearch');
+        const categoryPills = document.getElementById('categoryPills');
         const themeToggle = document.getElementById('themeToggle');
         const toast = document.getElementById('toast');
         const modalOverlay = document.getElementById('replyModal');
@@ -533,100 +638,99 @@
         const importBtn = document.getElementById('importBtn');
         const importFile = document.getElementById('importFile');
 
-        let currentEditId = null;
-
-        // update stats elements
+        // Stats elements
         const totalRepliesEl = document.getElementById('totalReplies');
         const pinnedCountEl = document.getElementById('pinnedCount');
         const totalClicksEl = document.getElementById('totalClicks');
         const mostUsedEl = document.getElementById('mostUsed');
+        
+        // Mini stats
+        const totalRepliesMini = document.getElementById('totalRepliesMini');
+        const pinnedCountMini = document.getElementById('pinnedCountMini');
+        const totalClicksMini = document.getElementById('totalClicksMini');
 
-        // ---------- helper: save to localStorage ----------
+        let currentEditId = null;
+        let selectedCategory = 'all';
+
         function saveReplies() {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(replies));
             render();
         }
 
-        // ---------- render grid based on search + filter ----------
-        function render() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const category = categoryFilter.value;
-
-            let filtered = replies.filter(r => {
-                const matchesSearch = r.title.toLowerCase().includes(searchTerm) || r.content.toLowerCase().includes(searchTerm);
-                const matchesCategory = category === 'all' || r.category === category;
-                return matchesSearch && matchesCategory;
-            });
-
-            // sort: pinned first, then by usageCount desc, then by title
-            filtered.sort((a, b) => {
-                if (a.pinned && !b.pinned) return -1;
-                if (!a.pinned && b.pinned) return 1;
-                if (a.pinned && b.pinned) return b.usageCount - a.usageCount;
-                return b.usageCount - a.usageCount;
-            });
-
-            // generate html
-            let html = '';
-            filtered.forEach((reply, index) => {
-                const shortUsage = reply.usageCount || 0;
-                const pinnedIcon = reply.pinned ? '<i class="fas fa-star pinned-icon"></i>' : '';
-                html += `
-                <div class="reply-card" data-id="${reply.id}" data-index="${index}">
-                    <div class="card-header">
-                        <div class="title-section">
-                            ${pinnedIcon}
-                            <span class="reply-title">${escapeHtml(reply.title)}</span>
-                            <span class="category-badge">${escapeHtml(reply.category)}</span>
-                        </div>
-                    </div>
-                    <div class="reply-content">${escapeHtml(reply.content)}</div>
-                    <div class="card-footer">
-                        <span class="usage-info"><i class="far fa-copy"></i> ${shortUsage} uses</span>
-                        <div class="card-actions">
-                            <button class="star-btn ${reply.pinned ? 'active' : ''}" data-id="${reply.id}" title="pin/unpin"><i class="fa${reply.pinned ? 's' : 'r'} fa-star"></i></button>
-                            <button class="copy-btn" data-id="${reply.id}"><i class="far fa-copy"></i> Copy</button>
-                        </div>
-                    </div>
-                </div>`;
-            });
-            container.innerHTML = html || '<div style="grid-column:1/-1; text-align:center; padding:3rem;">✨ No replies match – try another filter</div>';
-
-            // update category dropdown options if needed (but keep existing selection)
-            rebuildCategoryOptions();
-
-            // update stats
-            updateStats();
-        }
-
         function escapeHtml(unsafe) {
             return unsafe.replace(/[&<>"]/g, function(m) {
-                if(m === '&') return '&amp;'; if(m === '<') return '&lt;'; if(m === '>') return '&gt;'; if(m === '"') return '&quot;';
+                if(m === '&') return '&amp;';
+                if(m === '<') return '&lt;';
+                if(m === '>') return '&gt;';
+                if(m === '"') return '&quot;';
                 return m;
             });
         }
 
-        function rebuildCategoryOptions() {
-            const categories = [...new Set(replies.map(r => r.category))].sort();
-            const currentVal = categoryFilter.value;
-            categoryFilter.innerHTML = '<option value="all">🏷️ All categories</option>';
+        function rebuildCategoryPills() {
+            const categories = ['all', ...new Set(replies.map(r => r.category))].sort();
+            let html = '';
             categories.forEach(cat => {
-                categoryFilter.innerHTML += `<option value="${cat}">${cat}</option>`;
+                const displayName = cat === 'all' ? 'All' : cat;
+                html += `<span class="category-pill ${cat === 'all' ? 'all-pill' : ''} ${selectedCategory === cat ? 'active' : ''}" data-category="${cat}">${displayName}</span>`;
             });
-            if (categories.includes(currentVal)) categoryFilter.value = currentVal;
-            else categoryFilter.value = 'all';
+            categoryPills.innerHTML = html;
         }
 
         function updateStats() {
-            totalRepliesEl.innerText = replies.length;
-            pinnedCountEl.innerText = replies.filter(r => r.pinned).length;
+            const total = replies.length;
+            const pinned = replies.filter(r => r.pinned).length;
             const totalClicks = replies.reduce((acc, r) => acc + (r.usageCount || 0), 0);
-            totalClicksEl.innerText = totalClicks;
             const mostUsedReply = replies.reduce((max, r) => (r.usageCount > (max?.usageCount || 0) ? r : max), null);
-            mostUsedEl.innerText = mostUsedReply ? mostUsedReply.title.substring(0, 15) + '…' : 'N/A';
+
+            totalRepliesEl.innerText = total;
+            pinnedCountEl.innerText = pinned;
+            totalClicksEl.innerText = totalClicks;
+            mostUsedEl.innerText = mostUsedReply ? mostUsedReply.title.substring(0, 10) + '…' : 'N/A';
+
+            totalRepliesMini.innerText = total;
+            pinnedCountMini.innerText = pinned;
+            totalClicksMini.innerText = totalClicks;
         }
 
-        // copy handler with usage increment
+        function render() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            let filtered = replies.filter(r => {
+                const matchesSearch = r.title.toLowerCase().includes(searchTerm) || r.content.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategory === 'all' || r.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            filtered.sort((a, b) => {
+                if (a.pinned && !b.pinned) return -1;
+                if (!a.pinned && b.pinned) return 1;
+                return b.usageCount - a.usageCount;
+            });
+
+            let html = '';
+            filtered.forEach(reply => {
+                const shortUsage = reply.usageCount || 0;
+                html += `
+                <div class="reply-card" data-id="${reply.id}">
+                    <i class="fa${reply.pinned ? 's' : 'r'} fa-star pinned-icon" data-id="${reply.id}" data-pin-action></i>
+                    <div class="card-header">
+                        <div class="title-section">
+                            <span class="reply-title">${escapeHtml(reply.title)}</span>
+                            <span class="category-badge">${escapeHtml(reply.category)}</span>
+                            <span class="usage-info"><i class="far fa-copy"></i> ${shortUsage}</span>
+                        </div>
+                    </div>
+                    <div class="reply-content">${escapeHtml(reply.content)}</div>
+                    <div class="card-footer"></div>
+                </div>`;
+            });
+            container.innerHTML = html || '<div style="grid-column:1/-1; text-align:center; padding:2rem;">✨ No replies match</div>';
+
+            rebuildCategoryPills();
+            updateStats();
+        }
+
         async function handleCopy(id) {
             const reply = replies.find(r => r.id === id);
             if (!reply) return;
@@ -637,11 +741,10 @@
                 toast.classList.add('show');
                 setTimeout(() => toast.classList.remove('show'), 2000);
             } catch (err) {
-                alert('Clipboard error');
+                // alert('Copy failed');
             }
         }
 
-        // toggle pin
         function togglePin(id) {
             const reply = replies.find(r => r.id === id);
             if (reply) {
@@ -650,19 +753,18 @@
             }
         }
 
-        // modal open for add/edit
         function openModal(editId = null) {
             currentEditId = editId;
             if (editId) {
                 const r = replies.find(r => r.id === editId);
                 if (r) {
-                    modalTitle.innerText = '✏️ Edit reply';
+                    modalTitle.innerText = 'Edit reply';
                     modalTitleInput.value = r.title;
                     modalContentInput.value = r.content;
                     modalCategoryInput.value = r.category;
                 }
             } else {
-                modalTitle.innerText = '➕ Add new reply';
+                modalTitle.innerText = 'Add new reply';
                 modalTitleInput.value = '';
                 modalContentInput.value = '';
                 modalCategoryInput.value = '';
@@ -670,7 +772,6 @@
             modalOverlay.classList.add('show');
         }
 
-        // save modal
         function saveModal() {
             const title = modalTitleInput.value.trim();
             const content = modalContentInput.value.trim();
@@ -702,19 +803,17 @@
             modalOverlay.classList.remove('show');
         }
 
-        // export data as json
         function exportData() {
             const dataStr = JSON.stringify(replies, null, 2);
             const blob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `fast-reply-backup-${new Date().toISOString().slice(0,10)}.json`;
+            a.download = `replies-${new Date().toISOString().slice(0,10)}.json`;
             a.click();
             URL.revokeObjectURL(url);
         }
 
-        // import json
         function importFromFile(file) {
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -731,57 +830,61 @@
             reader.readAsText(file);
         }
 
-        // keyboard navigation: 1-9 copy first 9 visible cards
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'f') { e.preventDefault(); searchInput.focus(); return; }
-            const keyNum = parseInt(e.key);
-            if (!isNaN(keyNum) && keyNum >= 1 && keyNum <= 9) {
-                e.preventDefault();
-                const cards = [...document.querySelectorAll('.reply-card')];
-                if (cards.length >= keyNum) {
-                    const card = cards[keyNum-1];
-                    const id = card.dataset.id;
-                    if (id) handleCopy(id);
-                }
+        // Event Listeners
+        document.addEventListener('click', (e) => {
+            const card = e.target.closest('.reply-card');
+            if (card && !e.target.closest('[data-pin-action]')) {
+                const id = card.dataset.id;
+                handleCopy(id);
+            }
+
+            if (e.target.closest('[data-pin-action]')) {
+                e.stopPropagation();
+                const id = e.target.closest('[data-pin-action]').dataset.id;
+                togglePin(id);
             }
         });
 
-        // theme toggle
+        categoryPills.addEventListener('click', (e) => {
+            const pill = e.target.closest('.category-pill');
+            if (pill) {
+                selectedCategory = pill.dataset.category;
+                render();
+            }
+        });
+
+        clearSearch.addEventListener('click', () => {
+            searchInput.value = '';
+            render();
+            searchInput.focus();
+        });
+
+        searchInput.addEventListener('input', render);
+
+        // Ctrl+F to focus search
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'f') {
+                e.preventDefault();
+                searchInput.focus();
+                searchInput.select();
+            }
+        });
+
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark');
             localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
         });
-        // load theme
-        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
 
-        // event delegation
-        container.addEventListener('click', (e) => {
-            const card = e.target.closest('.reply-card');
-            if (!card) return;
-            const id = card.dataset.id;
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+        }
 
-            if (e.target.closest('.copy-btn')) {
-                e.stopPropagation();
-                handleCopy(id);
-            } else if (e.target.closest('.star-btn')) {
-                e.stopPropagation();
-                togglePin(id);
-            } else {
-                // click on card area -> copy
-                handleCopy(id);
-            }
-        });
-
-        // search / filter
-        searchInput.addEventListener('input', render);
-        categoryFilter.addEventListener('change', render);
-
-        // modal buttons
         addReplyBtn.addEventListener('click', () => openModal());
         modalCancel.addEventListener('click', () => modalOverlay.classList.remove('show'));
         modalSave.addEventListener('click', saveModal);
-        // close modal if click outside
-        modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('show'); });
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) modalOverlay.classList.remove('show');
+        });
 
         exportBtn.addEventListener('click', exportData);
         importBtn.addEventListener('click', () => importFile.click());
@@ -789,8 +892,8 @@
             if (e.target.files[0]) importFromFile(e.target.files[0]);
         });
 
-        // initial render
-        rebuildCategoryOptions();
+        // Initial render
+        rebuildCategoryPills();
         render();
     })();
 </script>
