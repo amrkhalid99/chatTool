@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⚡ FAST REPLY · saved replies hub</title>
-    <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Rubik + Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Nunito:wght@400;600;700;800&family=Fira+Code:wght@400;500;600&family=Playfair+Display:wght@400;700&family=Dela+Gothic+One&display=swap"
+        rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rubik', 'Roboto', sans-serif;
+        /* =================== THEME DEFINITIONS =================== */
+        :root {
+            --font-ui: 'DM Sans', sans-serif;
+            --font-display: 'Syne', sans-serif;
+            --transition-theme: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
         }
 
-        :root {
+        /* DEFAULT LIGHT */
+        [data-theme="light"] {
             --bg: #f6f9fc;
             --surface: #ffffff;
             --surface-hover: #f2f5f9;
@@ -29,13 +32,16 @@
             --accent-soft: #dbeafe;
             --danger: #dc2626;
             --success: #059669;
-            --warning: #d97706;
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
-            --card-shadow: 0 2px 8px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.03);
             --pinned-star: #fbbf24;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, .07);
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            --ctx-bg: #ffffff;
+            --logo-a: #2563eb;
+            --logo-b: #7c3aed;
         }
 
-        body.dark {
+        /* DARK */
+        [data-theme="dark"] {
             --bg: #0f172a;
             --surface: #1e293b;
             --surface-hover: #2d3a4f;
@@ -44,17 +50,241 @@
             --text-secondary: #b0c4de;
             --accent: #3b82f6;
             --accent-soft: #1e3a5f;
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.5);
-            --card-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            --danger: #f87171;
+            --success: #34d399;
+            --pinned-star: #fbbf24;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, .5);
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+            --ctx-bg: #1e293b;
+            --logo-a: #60a5fa;
+            --logo-b: #a78bfa;
+        }
+
+        /* MIDNIGHT PURPLE */
+        [data-theme="midnight"] {
+            --bg: #0d0d1a;
+            --surface: #14142b;
+            --surface-hover: #1e1e3f;
+            --border: #2d2d5e;
+            --text-primary: #e8e8ff;
+            --text-secondary: #9090cc;
+            --accent: #7c3aed;
+            --accent-soft: #2d1b5e;
+            --danger: #f87171;
+            --success: #a78bfa;
+            --pinned-star: #fbbf24;
+            --shadow: 0 10px 30px rgba(124, 58, 237, .3);
+            --card-shadow: 0 4px 16px rgba(124, 58, 237, .15);
+            --ctx-bg: #14142b;
+            --logo-a: #a78bfa;
+            --logo-b: #f472b6;
+            --font-ui: 'Space Mono', monospace;
+            --font-display: 'Space Mono', monospace;
+        }
+
+        /* CYBERPUNK */
+        [data-theme="cyberpunk"] {
+            --bg: #0a0a0f;
+            --surface: #111118;
+            --surface-hover: #1a1a28;
+            --border: #00ff9f33;
+            --text-primary: #00ff9f;
+            --text-secondary: #00cc7f;
+            --accent: #ff00aa;
+            --accent-soft: #ff00aa22;
+            --danger: #ff4444;
+            --success: #00ff9f;
+            --pinned-star: #ffee00;
+            --shadow: 0 0 20px #ff00aa44;
+            --card-shadow: 0 0 10px #00ff9f22;
+            --ctx-bg: #111118;
+            --logo-a: #00ff9f;
+            --logo-b: #ff00aa;
+            --font-ui: 'Fira Code', monospace;
+            --font-display: 'Fira Code', monospace;
+        }
+
+        /* SAKURA (Anime) */
+        [data-theme="anime"] {
+            --bg: #fff0f5;
+            --surface: #ffffff;
+            --surface-hover: #ffe4ef;
+            --border: #ffc0d9;
+            --text-primary: #5c2a45;
+            --text-secondary: #a06080;
+            --accent: #e91e8c;
+            --accent-soft: #ffd6eb;
+            --danger: #ff4466;
+            --success: #22c55e;
+            --pinned-star: #ff9800;
+            --shadow: 0 8px 24px rgba(233, 30, 140, .12);
+            --card-shadow: 0 2px 12px rgba(233, 30, 140, .08);
+            --ctx-bg: #ffffff;
+            --logo-a: #e91e8c;
+            --logo-b: #9c27b0;
+            --font-ui: 'Nunito', sans-serif;
+            --font-display: 'Nunito', sans-serif;
+        }
+
+        /* FOREST */
+        [data-theme="forest"] {
+            --bg: #0f1f0f;
+            --surface: #162016;
+            --surface-hover: #1f2e1f;
+            --border: #2d4a2d;
+            --text-primary: #d4edda;
+            --text-secondary: #8fbc8f;
+            --accent: #4caf50;
+            --accent-soft: #1a3a1a;
+            --danger: #ff6b6b;
+            --success: #69f0ae;
+            --pinned-star: #ffd54f;
+            --shadow: 0 10px 25px rgba(0, 0, 0, .5);
+            --card-shadow: 0 4px 16px rgba(76, 175, 80, .1);
+            --ctx-bg: #162016;
+            --logo-a: #69f0ae;
+            --logo-b: #4caf50;
+        }
+
+        /* SUNSET */
+        [data-theme="sunset"] {
+            --bg: #1a0a00;
+            --surface: #2a1200;
+            --surface-hover: #3a1e00;
+            --border: #6b3000;
+            --text-primary: #ffe8cc;
+            --text-secondary: #ffaa66;
+            --accent: #ff6600;
+            --accent-soft: #4a1a00;
+            --danger: #ff4444;
+            --success: #ffcc00;
+            --pinned-star: #ffcc00;
+            --shadow: 0 10px 30px rgba(255, 102, 0, .3);
+            --card-shadow: 0 4px 16px rgba(255, 102, 0, .15);
+            --ctx-bg: #2a1200;
+            --logo-a: #ff6600;
+            --logo-b: #ff9900;
+        }
+
+        /* OCEAN */
+        [data-theme="ocean"] {
+            --bg: #001824;
+            --surface: #002233;
+            --surface-hover: #003044;
+            --border: #0066aa55;
+            --text-primary: #c0eeff;
+            --text-secondary: #60aacc;
+            --accent: #00aaff;
+            --accent-soft: #002244;
+            --danger: #ff6688;
+            --success: #00ffcc;
+            --pinned-star: #ffdd44;
+            --shadow: 0 10px 30px rgba(0, 170, 255, .2);
+            --card-shadow: 0 4px 16px rgba(0, 170, 255, .1);
+            --ctx-bg: #002233;
+            --logo-a: #00aaff;
+            --logo-b: #00ffcc;
+        }
+
+        /* CREAM / PAPER */
+        [data-theme="paper"] {
+            --bg: #f5f0e8;
+            --surface: #fdfaf5;
+            --surface-hover: #f0ebe0;
+            --border: #d4c9b0;
+            --text-primary: #2c2016;
+            --text-secondary: #7a6a50;
+            --accent: #8b4513;
+            --accent-soft: #e8d8c0;
+            --danger: #cc3300;
+            --success: #3a7d44;
+            --pinned-star: #cc8800;
+            --shadow: 0 4px 16px rgba(44, 32, 22, .1);
+            --card-shadow: 0 2px 8px rgba(44, 32, 22, .06);
+            --ctx-bg: #fdfaf5;
+            --logo-a: #8b4513;
+            --logo-b: #cc6600;
+            --font-ui: 'DM Sans', sans-serif;
+            --font-display: 'Playfair Display', serif;
+        }
+
+        /* MONOCHROME */
+        [data-theme="mono"] {
+            --bg: #111111;
+            --surface: #1c1c1c;
+            --surface-hover: #282828;
+            --border: #3a3a3a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #888888;
+            --accent: #ffffff;
+            --accent-soft: #2a2a2a;
+            --danger: #ff5555;
+            --success: #aaaaaa;
+            --pinned-star: #cccccc;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .6);
+            --card-shadow: 0 4px 16px rgba(0, 0, 0, .4);
+            --ctx-bg: #1c1c1c;
+            --logo-a: #ffffff;
+            --logo-b: #888888;
+            --font-ui: 'Space Mono', monospace;
+            --font-display: 'Space Mono', monospace;
+        }
+
+        /* NORD */
+        [data-theme="nord"] {
+            --bg: #2e3440;
+            --surface: #3b4252;
+            --surface-hover: #434c5e;
+            --border: #4c566a;
+            --text-primary: #eceff4;
+            --text-secondary: #d8dee9;
+            --accent: #88c0d0;
+            --accent-soft: #3b4a52;
+            --danger: #bf616a;
+            --success: #a3be8c;
+            --pinned-star: #ebcb8b;
+            --shadow: 0 10px 25px rgba(0, 0, 0, .4);
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+            --ctx-bg: #3b4252;
+            --logo-a: #88c0d0;
+            --logo-b: #b48ead;
+        }
+
+        /* LAVA */
+        [data-theme="lava"] {
+            --bg: #110000;
+            --surface: #1e0000;
+            --surface-hover: #2d0505;
+            --border: #550000;
+            --text-primary: #ffe0d0;
+            --text-secondary: #cc6655;
+            --accent: #ff2200;
+            --accent-soft: #3a0000;
+            --danger: #ff6666;
+            --success: #ff9900;
+            --pinned-star: #ffaa00;
+            --shadow: 0 10px 30px rgba(255, 34, 0, .3);
+            --card-shadow: 0 4px 16px rgba(255, 34, 0, .15);
+            --ctx-bg: #1e0000;
+            --logo-a: #ff4400;
+            --logo-b: #ff9900;
+        }
+
+        /* =================== GLOBAL =================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
+            font-family: var(--font-ui);
             background-color: var(--bg);
             color: var(--text-primary);
-            transition: background-color 0.2s, color 0.2s;
             min-height: 100vh;
             padding: 1rem;
             line-height: 1.5;
+            transition: var(--transition-theme);
         }
 
         .container {
@@ -62,7 +292,7 @@
             margin: 0 auto;
         }
 
-        /* Nav Bar */
+        /* =================== NAV =================== */
         .nav-bar {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -75,6 +305,7 @@
             flex-wrap: wrap;
             gap: 1rem;
             box-shadow: var(--card-shadow);
+            transition: var(--transition-theme);
         }
 
         .nav-left {
@@ -85,16 +316,16 @@
         }
 
         .logo h1 {
+            font-family: var(--font-display);
             font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(145deg, var(--accent), #7c3aed);
+            font-weight: 800;
+            background: linear-gradient(145deg, var(--logo-a), var(--logo-b));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
             white-space: nowrap;
         }
 
-        /* Search in Nav */
         .nav-search {
             display: flex;
             background: var(--bg);
@@ -104,6 +335,12 @@
             align-items: center;
             gap: 8px;
             min-width: 280px;
+            transition: var(--transition-theme);
+        }
+
+        .nav-search:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
         }
 
         .nav-search i {
@@ -118,6 +355,7 @@
             font-size: 0.9rem;
             color: var(--text-primary);
             outline: none;
+            font-family: var(--font-ui);
         }
 
         .nav-search input::placeholder {
@@ -142,6 +380,11 @@
             flex-wrap: wrap;
         }
 
+        /* Theme Dropdown */
+        .theme-wrapper {
+            position: relative;
+        }
+
         .theme-toggle {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -153,22 +396,103 @@
             cursor: pointer;
             transition: 0.2s;
             font-size: 0.9rem;
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            white-space: nowrap;
         }
 
-        .stats-mini {
-            display: flex;
-            gap: 1rem;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        .theme-toggle:hover {
+            border-color: var(--accent);
         }
 
-        .stats-mini span {
+        .theme-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 0.5rem;
+            z-index: 500;
+            width: 200px;
+            box-shadow: var(--shadow);
+            display: none;
+            animation: dropIn 0.2s ease;
+        }
+
+        .theme-dropdown.open {
+            display: block;
+        }
+
+        @keyframes dropIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .theme-option {
             display: flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 10px;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            transition: background 0.15s;
+            font-family: var(--font-ui);
         }
 
-        /* Action Buttons in Nav */
+        .theme-option:hover {
+            background: var(--surface-hover);
+        }
+
+        .theme-option.active {
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .theme-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 2px solid var(--border);
+        }
+
+        /* Stats Mini */
+        .stats-mini {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            align-items: center;
+        }
+
+        .stat-mini-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .stat-mini-item i {
+            font-size: 0.8rem;
+        }
+
+        .stat-mini-num {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: var(--font-display);
+        }
+
+        /* Buttons */
         .nav-buttons {
             display: flex;
             gap: 0.5rem;
@@ -188,6 +512,7 @@
             align-items: center;
             gap: 0.5rem;
             white-space: nowrap;
+            font-family: var(--font-ui);
         }
 
         .btn-primary {
@@ -201,50 +526,17 @@
         }
 
         .btn-primary:hover {
-            background: #1d4ed8;
+            filter: brightness(1.15);
         }
 
-        /* Compact Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.8rem;
-            margin-bottom: 1.5rem;
+        .btn-danger {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: white;
         }
 
-        .stat-card {
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--border);
-            box-shadow: var(--card-shadow);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .stat-icon {
-            background: var(--accent-soft);
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 1rem;
-        }
-
-        .stat-content h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .stat-content p {
-            color: var(--text-secondary);
-            font-size: 0.7rem;
-            font-weight: 500;
+        .btn-danger:hover {
+            filter: brightness(1.1);
         }
 
         /* Category Pills */
@@ -266,6 +558,7 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
+            font-family: var(--font-ui);
         }
 
         .category-pill:hover {
@@ -279,12 +572,7 @@
             border-color: var(--accent);
         }
 
-        .category-pill.all-pill {
-            background: var(--accent-soft);
-            border-color: var(--accent);
-        }
-
-        /* Replies Grid - Responsive */
+        /* Replies Grid */
         .replies-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -301,6 +589,19 @@
             transition: all 0.2s;
             cursor: pointer;
             position: relative;
+            animation: cardIn 0.25s ease both;
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .reply-card:hover {
@@ -332,18 +633,19 @@
             top: 10px;
             right: 10px;
             z-index: 2;
+            transition: transform 0.2s;
         }
 
         .pinned-icon:hover {
-            transform: scale(1.1);
+            transform: scale(1.25) rotate(-5deg);
         }
 
         .reply-title {
             font-weight: 600;
             font-size: 1rem;
-            font-weight: normal;
             color: var(--text-primary);
             padding-right: 1.5rem;
+            font-family: var(--font-display);
         }
 
         .category-badge {
@@ -361,13 +663,13 @@
             border-radius: 8px;
             margin: 8px 0;
             font-size: 0.9rem;
-            font-weight: 600;
             color: var(--text-primary);
             word-break: break-word;
             max-height: 100px;
             overflow-y: auto;
             line-height: 1.5;
             border: 1px solid var(--border);
+            transition: var(--transition-theme);
         }
 
         .card-footer {
@@ -388,16 +690,109 @@
             border-radius: 30px;
         }
 
-        /* Modal */
+        /* =================== EMPTY STATE =================== */
+        .empty-state {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .empty-state svg {
+            opacity: 0.5;
+            animation: floatBob 3s ease-in-out infinite;
+        }
+
+        @keyframes floatBob {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .empty-state h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--text-primary);
+        }
+
+        .empty-state p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 300px;
+        }
+
+        /* =================== CONTEXT MENU =================== */
+        .ctx-menu {
+            position: fixed;
+            background: var(--ctx-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.4rem;
+            z-index: 9999;
+            min-width: 170px;
+            box-shadow: var(--shadow);
+            display: none;
+            animation: dropIn 0.15s ease;
+        }
+
+        .ctx-menu.open {
+            display: block;
+        }
+
+        .ctx-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.55rem 0.8rem;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            transition: background 0.12s;
+        }
+
+        .ctx-item:hover {
+            background: var(--surface-hover);
+        }
+
+        .ctx-item.danger {
+            color: var(--danger);
+        }
+
+        .ctx-item.danger:hover {
+            background: #ff000015;
+        }
+
+        .ctx-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 0.3rem 0;
+        }
+
+        /* =================== MODAL =================== */
         .modal-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(6px);
             visibility: hidden;
             opacity: 0;
             transition: 0.2s;
@@ -416,14 +811,31 @@
             padding: 1.5rem;
             border: 1px solid var(--border);
             box-shadow: var(--shadow);
+            animation: modalPop 0.25s ease;
+            transition: var(--transition-theme);
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.95) translateY(10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
         }
 
         .modal h2 {
             margin-bottom: 1rem;
             font-size: 1.3rem;
+            font-family: var(--font-display);
         }
 
-        .modal input, .modal textarea, .modal select {
+        .modal input,
+        .modal textarea,
+        .modal select {
             width: 100%;
             padding: 0.8rem 1rem;
             border-radius: 8px;
@@ -432,6 +844,14 @@
             color: var(--text-primary);
             margin-bottom: 1rem;
             font-size: 0.95rem;
+            font-family: var(--font-ui);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .modal input:focus,
+        .modal textarea:focus {
+            border-color: var(--accent);
         }
 
         .modal-actions {
@@ -440,462 +860,551 @@
             justify-content: flex-end;
         }
 
+        /* =================== TOAST =================== */
         .toast {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
             background: var(--surface);
-            border-left: 6px solid var(--success);
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            border-left: 5px solid var(--success);
+            border: 1px solid var(--border);
+            border-left-width: 5px;
+            border-left-color: var(--success);
+            padding: 0.9rem 1.5rem;
+            border-radius: 10px;
             box-shadow: var(--shadow);
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            transform: translateY(200%);
-            transition: 0.3s;
+            gap: 0.75rem;
             z-index: 1200;
-            border: 1px solid var(--border);
+            font-family: var(--font-ui);
+            color: var(--text-primary);
+            /* FIXED: use transform instead of display:none */
+            transform: translateX(calc(100% + 3rem));
+            opacity: 0;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+            pointer-events: none;
         }
 
         .toast.show {
-            transform: translateY(0);
+            transform: translateX(0);
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        hr {
-            border: 0.5px solid var(--border);
-            margin: 1.5rem 0 1rem;
+        .toast-icon {
+            color: var(--success);
+            font-size: 1.1rem;
         }
 
-        @media (max-width: 1024px) {
-            .nav-left {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 1rem;
-                width: 100%;
+        /* =================== COPY FLASH =================== */
+        @keyframes copyFlash {
+            0% {
+                box-shadow: 0 0 0 0 var(--accent);
             }
-            
-            .nav-search {
-                width: 100%;
+
+            50% {
+                box-shadow: 0 0 0 6px var(--accent-soft);
+            }
+
+            100% {
+                box-shadow: var(--card-shadow);
             }
         }
 
+        .reply-card.copied {
+            animation: copyFlash 0.5s ease;
+        }
+
+        /* =================== RESPONSIVE =================== */
         @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
             .nav-bar {
                 flex-direction: column;
                 align-items: stretch;
             }
-            
+
+            .nav-left {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .nav-search {
+                min-width: unset;
+            }
+
             .nav-actions {
                 justify-content: space-between;
             }
-            
+
+            .stats-mini {
+                display: none;
+            }
+
             .replies-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-<body>
-<div class="container">
-    <!-- Nav Bar -->
-    <div class="nav-bar">
-        <div class="nav-left">
-            <div class="logo">
-                <h1>⚡ FAST REPLY</h1>
+
+<body data-theme="light">
+    <div class="container">
+
+        <!-- Nav Bar -->
+        <div class="nav-bar">
+            <div class="nav-left">
+                <div class="logo">
+                    <h1>⚡ FAST REPLY</h1>
+                </div>
+                <div class="nav-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search replies… or type #category" autofocus>
+                    <i class="fas fa-times clear-search-nav" id="clearSearch"></i>
+                </div>
             </div>
-            
-            <!-- Search in Nav Bar -->
-            <div class="nav-search">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search replies... (Ctrl+F)" autofocus>
-                <i class="fas fa-times clear-search-nav" id="clearSearch"></i>
+
+            <div class="nav-actions">
+                <!-- Stats -->
+                <div class="stats-mini">
+                    <div class="stat-mini-item">
+                        <i class="fas fa-message" style="color:var(--accent)"></i>
+                        <span class="stat-mini-num" id="totalReplies">0</span>
+                        <span>replies</span>
+                    </div>
+                    <div class="stat-mini-item">
+                        <i class="fas fa-star" style="color:var(--pinned-star)"></i>
+                        <span class="stat-mini-num" id="pinnedCount">0</span>
+                        <span>pinned</span>
+                    </div>
+                    <div class="stat-mini-item">
+                        <i class="fas fa-copy" style="color:var(--accent)"></i>
+                        <span class="stat-mini-num" id="totalClicks">0</span>
+                        <span>copies</span>
+                    </div>
+                    <div class="stat-mini-item">
+                        <i class="fas fa-fire" style="color:var(--danger)"></i>
+                        <span class="stat-mini-num" id="mostUsed">-</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="nav-buttons">
+                    <button class="btn" id="importBtn"><i class="fas fa-upload"></i> Import</button>
+                    <button class="btn" id="exportBtn"><i class="fas fa-download"></i> Export</button>
+                    <button class="btn btn-primary" id="addReplyBtn"><i class="fas fa-plus"></i> New</button>
+                </div>
+
+                <!-- Theme Dropdown -->
+                <div class="theme-wrapper">
+                    <div class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-palette"></i>
+                        <span id="themeLabel">Light</span>
+                        <i class="fas fa-chevron-down" style="font-size:.7rem"></i>
+                    </div>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <!-- filled by JS -->
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="nav-actions">
-            <div class="stats-mini">
-                <span><i class="fas fa-message"></i> <span id="totalRepliesMini">0</span></span>
-                <span><i class="fas fa-star" style="color: var(--pinned-star);"></i> <span id="pinnedCountMini">0</span></span>
-                <span><i class="fas fa-copy"></i> <span id="totalClicksMini">0</span></span>
-            </div>
-            
-            <div class="nav-buttons">
-                <button class="btn" id="importBtn" title="Import JSON"><i class="fas fa-upload"></i> Import</button>
-                <button class="btn" id="exportBtn" title="Export JSON"><i class="fas fa-download"></i> Export</button>
-                <button class="btn btn-primary" id="addReplyBtn"><i class="fas fa-plus"></i> New</button>
-            </div>
-            
-            <div class="theme-toggle" id="themeToggle">
-                <i class="fas fa-sun"></i>
-                <span>🌓</span>
+
+        <input type="file" id="importFile" accept="application/json" style="display:none">
+
+        <!-- Category Pills -->
+        <div class="category-pills" id="categoryPills"></div>
+
+        <!-- Replies Grid -->
+        <div id="repliesContainer" class="replies-grid"></div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMsg">Copied to clipboard!</span>
+    </div>
+
+    <!-- Context Menu -->
+    <div id="ctxMenu" class="ctx-menu">
+        <div class="ctx-item" id="ctxCopy"><i class="fas fa-copy"></i> Copy</div>
+        <div class="ctx-item" id="ctxEdit"><i class="fas fa-pen"></i> Edit</div>
+        <div class="ctx-item" id="ctxDuplicate"><i class="fas fa-clone"></i> Duplicate</div>
+        <div class="ctx-item" id="ctxPin"><i class="fas fa-star"></i> Pin / Unpin</div>
+        <div class="ctx-divider"></div>
+        <div class="ctx-item danger" id="ctxDelete"><i class="fas fa-trash"></i> Delete</div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="replyModal">
+        <div class="modal">
+            <h2 id="modalTitle">➕ Add new reply</h2>
+            <input type="text" id="modalTitleInput" placeholder="Title" autocomplete="off">
+            <textarea id="modalContentInput" rows="5" placeholder="Reply text…"></textarea>
+            <input type="text" id="modalCategoryInput" placeholder="Category">
+            <div class="modal-actions">
+                <button class="btn" id="modalCancel">Cancel</button>
+                <button class="btn btn-primary" id="modalSave">Save</button>
             </div>
         </div>
     </div>
 
-    <!-- Hidden file input -->
-    <input type="file" id="importFile" accept="application/json" style="display: none;">
+    <script>
+        (function () {
+            const STORAGE_KEY = 'fastReplyData_v2';
+            const THEME_KEY = 'fastReplyTheme';
 
-    <!-- Compact Stats -->
-    <!-- <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-icon"><i class="fas fa-message"></i></div>
-            <div class="stat-content">
-                <h3 id="totalReplies">0</h3>
-                <p>total replies</p>
+            // ─── Themes ───────────────────────────────────────────
+            const THEMES = [
+                { id: 'light', label: 'Light', icon: '☀️', dot: ['#f6f9fc', '#2563eb'] },
+                { id: 'dark', label: 'Dark', icon: '🌙', dot: ['#0f172a', '#3b82f6'] },
+                { id: 'midnight', label: 'Midnight', icon: '🔮', dot: ['#0d0d1a', '#7c3aed'] },
+                { id: 'cyberpunk', label: 'Cyberpunk', icon: '🤖', dot: ['#0a0a0f', '#ff00aa'] },
+                { id: 'anime', label: 'Sakura', icon: '🌸', dot: ['#fff0f5', '#e91e8c'] },
+                { id: 'forest', label: 'Forest', icon: '🌿', dot: ['#0f1f0f', '#4caf50'] },
+                { id: 'sunset', label: 'Sunset', icon: '🌅', dot: ['#1a0a00', '#ff6600'] },
+                { id: 'ocean', label: 'Ocean', icon: '🌊', dot: ['#001824', '#00aaff'] },
+                { id: 'paper', label: 'Paper', icon: '📜', dot: ['#f5f0e8', '#8b4513'] },
+                { id: 'mono', label: 'Monochrome', icon: '🖤', dot: ['#111111', '#ffffff'] },
+                { id: 'nord', label: 'Nord', icon: '❄️', dot: ['#2e3440', '#88c0d0'] },
+                { id: 'lava', label: 'Lava', icon: '🌋', dot: ['#110000', '#ff2200'] },
+            ];
+
+            // ─── Default Data ──────────────────────────────────────
+            const defaultReplies = [
+                { id: '1', title: '👋 Welcome', content: 'Hello! Thank you for contacting support. How may I assist you today?', category: 'support', usageCount: 24, pinned: true, createdAt: Date.now() - 100000 },
+                { id: '2', title: '📦 Order', content: 'Your order #{order} is being processed.', category: 'orders', usageCount: 18, pinned: false, createdAt: Date.now() - 200000 },
+                { id: '3', title: '🤝 Thanks', content: 'Thanks for reaching out! Have a wonderful day 😊', category: 'friendly', usageCount: 42, pinned: true, createdAt: Date.now() - 50000 },
+            ];
+
+            let replies = [];
+            try {
+                const s = localStorage.getItem(STORAGE_KEY);
+                replies = s ? JSON.parse(s) : defaultReplies;
+            } catch { replies = defaultReplies; }
+
+            let selectedCategory = 'all';
+            let currentEditId = null;
+            let ctxTargetId = null;
+
+            // ─── DOM refs ─────────────────────────────────────────
+            const $ = id => document.getElementById(id);
+            const container = $('repliesContainer');
+            const searchInput = $('searchInput');
+            const clearSearch = $('clearSearch');
+            const categoryPills = $('categoryPills');
+            const themeToggle = $('themeToggle');
+            const themeDropdown = $('themeDropdown');
+            const themeLabel = $('themeLabel');
+            const toast = $('toast');
+            const toastMsg = $('toastMsg');
+            const modalOverlay = $('replyModal');
+            const modalTitleEl = $('modalTitle');
+            const modalTitleInput = $('modalTitleInput');
+            const modalContentInput = $('modalContentInput');
+            const modalCategoryInput = $('modalCategoryInput');
+            const totalRepliesEl = $('totalReplies');
+            const pinnedCountEl = $('pinnedCount');
+            const totalClicksEl = $('totalClicks');
+            const mostUsedEl = $('mostUsed');
+            const ctxMenu = $('ctxMenu');
+
+            // ─── Theme ────────────────────────────────────────────
+            let currentTheme = localStorage.getItem(THEME_KEY) || 'light';
+
+            function applyTheme(id) {
+                currentTheme = id;
+                document.body.setAttribute('data-theme', id);
+                const t = THEMES.find(t => t.id === id);
+                if (t) themeLabel.textContent = t.label;
+                localStorage.setItem(THEME_KEY, id);
+                renderThemeDropdown();
+            }
+
+            function renderThemeDropdown() {
+                themeDropdown.innerHTML = THEMES.map(t => `
+            <div class="theme-option ${t.id === currentTheme ? 'active' : ''}" data-theme-id="${t.id}">
+                <span class="theme-dot" style="background:linear-gradient(135deg,${t.dot[0]} 50%,${t.dot[1]} 50%)"></span>
+                ${t.icon} ${t.label}
             </div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-icon"><i class="fas fa-star" style="color: var(--pinned-star);"></i></div>
-            <div class="stat-content">
-                <h3 id="pinnedCount">0</h3>
-                <p>pinned</p>
-            </div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-icon"><i class="fas fa-copy"></i></div>
-            <div class="stat-content">
-                <h3 id="totalClicks">0</h3>
-                <p>total copies</p>
-            </div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-icon"><i class="fas fa-fire"></i></div>
-            <div class="stat-content">
-                <h3 id="mostUsed">-</h3>
-                <p>most used</p>
-            </div>
-        </div>
-    </div> -->
+        `).join('');
+            }
 
-    <!-- Category Pills -->
-    <div class="category-pills" id="categoryPills">
-        <!-- All pill will always be first via JS -->
-    </div>
-
-    <!-- Replies Grid -->
-    <div id="repliesContainer" class="replies-grid"></div>
-</div>
-
-<!-- Toast -->
-<div id="toast" class="toast"><i class="fas fa-check-circle" style="color: var(--success);"></i> <span>Copied to clipboard!</span></div>
-
-<!-- Modal -->
-<div class="modal-overlay" id="replyModal">
-    <div class="modal">
-        <h2 id="modalTitle">➕ Add new reply</h2>
-        <input type="text" id="modalTitleInput" placeholder="Title" autocomplete="off">
-        <textarea id="modalContentInput" rows="4" placeholder="Reply text..."></textarea>
-        <input type="text" id="modalCategoryInput" placeholder="Category">
-        <div class="modal-actions">
-            <button class="btn" id="modalCancel">Cancel</button>
-            <button class="btn btn-primary" id="modalSave">Save</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    (function() {
-        const STORAGE_KEY = 'fastReplyData';
-        
-        // Sample data
-        const defaultReplies = [
-            { id: '1', title: '👋 Welcome', content: 'Hello! Thank you for contacting support. How may I assist you today?', category: 'support', usageCount: 24, pinned: true, createdAt: Date.now() - 100000 },
-            { id: '2', title: '📦 Order', content: 'Your order #{order} is being processed.', category: 'orders', usageCount: 18, pinned: false, createdAt: Date.now() - 200000 },
-            { id: '3', title: '🤝 Thanks', content: 'Thanks for reaching out! Have a wonderful day 😊', category: 'friendly', usageCount: 42, pinned: true, createdAt: Date.now() - 50000 },
-        ];
-
-        // Load data
-        let replies = [];
-        try {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            replies = stored ? JSON.parse(stored) : defaultReplies;
-        } catch (e) {
-            replies = defaultReplies;
-        }
-
-        // DOM elements
-        const container = document.getElementById('repliesContainer');
-        const searchInput = document.getElementById('searchInput');
-        const clearSearch = document.getElementById('clearSearch');
-        const categoryPills = document.getElementById('categoryPills');
-        const themeToggle = document.getElementById('themeToggle');
-        const toast = document.getElementById('toast');
-        const modalOverlay = document.getElementById('replyModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalTitleInput = document.getElementById('modalTitleInput');
-        const modalContentInput = document.getElementById('modalContentInput');
-        const modalCategoryInput = document.getElementById('modalCategoryInput');
-        const modalCancel = document.getElementById('modalCancel');
-        const modalSave = document.getElementById('modalSave');
-        const addReplyBtn = document.getElementById('addReplyBtn');
-        const exportBtn = document.getElementById('exportBtn');
-        const importBtn = document.getElementById('importBtn');
-        const importFile = document.getElementById('importFile');
-
-        // Stats elements
-        const totalRepliesEl = document.getElementById('totalReplies');
-        const pinnedCountEl = document.getElementById('pinnedCount');
-        const totalClicksEl = document.getElementById('totalClicks');
-        const mostUsedEl = document.getElementById('mostUsed');
-        
-        // Mini stats
-        const totalRepliesMini = document.getElementById('totalRepliesMini');
-        const pinnedCountMini = document.getElementById('pinnedCountMini');
-        const totalClicksMini = document.getElementById('totalClicksMini');
-
-        let currentEditId = null;
-        let selectedCategory = 'all';
-
-        function saveReplies() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(replies));
-            render();
-        }
-
-        function escapeHtml(unsafe) {
-            return unsafe.replace(/[&<>"]/g, function(m) {
-                if(m === '&') return '&amp;';
-                if(m === '<') return '&lt;';
-                if(m === '>') return '&gt;';
-                if(m === '"') return '&quot;';
-                return m;
-            });
-        }
-
-        function rebuildCategoryPills() {
-            const categories = ['all', ...new Set(replies.map(r => r.category))].sort();
-            let html = '';
-            categories.forEach(cat => {
-                const displayName = cat === 'all' ? 'All' : cat;
-                html += `<span class="category-pill ${cat === 'all' ? 'all-pill' : ''} ${selectedCategory === cat ? 'active' : ''}" data-category="${cat}">${displayName}</span>`;
-            });
-            categoryPills.innerHTML = html;
-        }
-
-        function updateStats() {
-            const total = replies.length;
-            const pinned = replies.filter(r => r.pinned).length;
-            const totalClicks = replies.reduce((acc, r) => acc + (r.usageCount || 0), 0);
-            const mostUsedReply = replies.reduce((max, r) => (r.usageCount > (max?.usageCount || 0) ? r : max), null);
-
-            totalRepliesEl.innerText = total;
-            pinnedCountEl.innerText = pinned;
-            totalClicksEl.innerText = totalClicks;
-            mostUsedEl.innerText = mostUsedReply ? mostUsedReply.title.substring(0, 10) + '…' : 'N/A';
-
-            totalRepliesMini.innerText = total;
-            pinnedCountMini.innerText = pinned;
-            totalClicksMini.innerText = totalClicks;
-        }
-
-        function render() {
-            const searchTerm = searchInput.value.toLowerCase();
-
-            let filtered = replies.filter(r => {
-                const matchesSearch = r.title.toLowerCase().includes(searchTerm) || r.content.toLowerCase().includes(searchTerm);
-                const matchesCategory = selectedCategory === 'all' || r.category === selectedCategory;
-                return matchesSearch && matchesCategory;
+            themeToggle.addEventListener('click', e => {
+                e.stopPropagation();
+                themeDropdown.classList.toggle('open');
             });
 
-            filtered.sort((a, b) => {
-                if (a.pinned && !b.pinned) return -1;
-                if (!a.pinned && b.pinned) return 1;
-                return b.usageCount - a.usageCount;
+            themeDropdown.addEventListener('click', e => {
+                const opt = e.target.closest('[data-theme-id]');
+                if (opt) {
+                    applyTheme(opt.dataset.themeId);
+                    themeDropdown.classList.remove('open');
+                }
             });
 
-            let html = '';
-            filtered.forEach(reply => {
-                const shortUsage = reply.usageCount || 0;
-                html += `
-                <div class="reply-card" data-id="${reply.id}">
-                    <i class="fa${reply.pinned ? 's' : 'r'} fa-star pinned-icon" data-id="${reply.id}" data-pin-action></i>
+            document.addEventListener('click', () => themeDropdown.classList.remove('open'));
+
+            // ─── Utilities ────────────────────────────────────────
+            function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(replies)); render(); }
+
+            function escape(s) {
+                return s.replace(/[&<>"]/g, m =>
+                    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+            }
+
+            let toastTimer;
+            function showToast(msg = 'Copied to clipboard!', color = 'var(--success)') {
+                toastMsg.textContent = msg;
+                toast.style.borderLeftColor = color;
+                toast.querySelector('.toast-icon').style.color = color;
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+            }
+
+            // ─── Stats ────────────────────────────────────────────
+            function updateStats() {
+                const total = replies.length;
+                const pinned = replies.filter(r => r.pinned).length;
+                const clicks = replies.reduce((a, r) => a + (r.usageCount || 0), 0);
+                const top = replies.reduce((mx, r) => (r.usageCount > (mx?.usageCount || 0) ? r : mx), null);
+                totalRepliesEl.textContent = total;
+                pinnedCountEl.textContent = pinned;
+                totalClicksEl.textContent = clicks;
+                mostUsedEl.textContent = top ? (top.title.substring(0, 10) + (top.title.length > 10 ? '…' : '')) : '-';
+            }
+
+            // ─── Category Pills ───────────────────────────────────
+            function rebuildPills() {
+                const cats = ['all', ...new Set(replies.map(r => r.category))].sort();
+                categoryPills.innerHTML = cats.map(cat => `
+            <span class="category-pill ${selectedCategory === cat ? 'active' : ''}" data-category="${cat}">
+                ${cat === 'all' ? 'All' : cat}
+            </span>
+        `).join('');
+            }
+
+            categoryPills.addEventListener('click', e => {
+                const p = e.target.closest('.category-pill');
+                if (p) { selectedCategory = p.dataset.category; render(); }
+            });
+
+            // ─── Smart Search: #category ──────────────────────────
+            function parseSearch(raw) {
+                const hashMatch = raw.match(/#(\S+)/);
+                let catFilter = null;
+                let term = raw;
+                if (hashMatch) {
+                    catFilter = hashMatch[1].toLowerCase();
+                    term = raw.replace(/#\S+/, '').trim();
+                }
+                return { term: term.toLowerCase(), catFilter };
+            }
+
+            // ─── Render ───────────────────────────────────────────
+            function render() {
+                const raw = searchInput.value;
+                const { term, catFilter } = parseSearch(raw);
+
+                let filtered = replies.filter(r => {
+                    const matchSearch = !term || r.title.toLowerCase().includes(term) || r.content.toLowerCase().includes(term);
+                    const activeCat = catFilter || (selectedCategory !== 'all' ? selectedCategory : null);
+                    const matchCat = !activeCat || r.category.toLowerCase() === activeCat;
+                    return matchSearch && matchCat;
+                });
+
+                filtered.sort((a, b) => {
+                    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+                    return b.usageCount - a.usageCount;
+                });
+
+                if (filtered.length === 0) {
+                    container.innerHTML = `
+                <div class="empty-state">
+                    <svg width="160" height="140" viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="80" cy="120" rx="60" ry="10" fill="var(--border)" opacity=".5"/>
+                        <rect x="30" y="20" width="100" height="80" rx="12" fill="var(--surface-hover)" stroke="var(--border)" stroke-width="2"/>
+                        <rect x="44" y="38" width="72" height="8" rx="4" fill="var(--border)"/>
+                        <rect x="44" y="54" width="52" height="8" rx="4" fill="var(--border)"/>
+                        <rect x="44" y="70" width="62" height="8" rx="4" fill="var(--border)"/>
+                        <circle cx="80" cy="60" r="28" fill="var(--bg)" stroke="var(--border)" stroke-width="2" stroke-dasharray="5 3"/>
+                        <text x="80" y="65" text-anchor="middle" font-size="26" font-family="sans-serif">🔍</text>
+                    </svg>
+                    <h3>Nothing here…</h3>
+                    <p>No replies match your search. Try different keywords or clear the filter.</p>
+                    <button class="btn" onclick="document.getElementById('searchInput').value='';document.getElementById('searchInput').dispatchEvent(new Event('input'))">Clear search</button>
+                </div>`;
+                } else {
+                    container.innerHTML = filtered.map((r, i) => `
+                <div class="reply-card" data-id="${r.id}" style="animation-delay:${i * 0.04}s">
+                    <i class="fa${r.pinned ? 's' : 'r'} fa-star pinned-icon" data-id="${r.id}" data-pin-action></i>
                     <div class="card-header">
                         <div class="title-section">
-                            <span class="reply-title">${escapeHtml(reply.title)}</span>
-                            <span class="category-badge">${escapeHtml(reply.category)}</span>
-                            <span class="usage-info"><i class="far fa-copy"></i> ${shortUsage}</span>
+                            <span class="reply-title">${escape(r.title)}</span>
+                            <span class="category-badge">${escape(r.category)}</span>
+                            <div class="usage-info"><i class="far fa-copy"></i> ${r.usageCount || 0}</div>
                         </div>
                     </div>
-                    <div class="reply-content">${escapeHtml(reply.content)}</div>
-                    <div class="card-footer"></div>
-                </div>`;
-            });
-            container.innerHTML = html || '<div style="grid-column:1/-1; text-align:center; padding:2rem;">✨ No replies match</div>';
-
-            rebuildCategoryPills();
-            updateStats();
-        }
-
-        async function handleCopy(id) {
-            const reply = replies.find(r => r.id === id);
-            if (!reply) return;
-            try {
-                await navigator.clipboard.writeText(reply.content);
-                reply.usageCount = (reply.usageCount || 0) + 1;
-                saveReplies();
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 2000);
-            } catch (err) {
-                // alert('Copy failed');
-            }
-        }
-
-        function togglePin(id) {
-            const reply = replies.find(r => r.id === id);
-            if (reply) {
-                reply.pinned = !reply.pinned;
-                saveReplies();
-            }
-        }
-
-        function openModal(editId = null) {
-            currentEditId = editId;
-            if (editId) {
-                const r = replies.find(r => r.id === editId);
-                if (r) {
-                    modalTitle.innerText = 'Edit reply';
-                    modalTitleInput.value = r.title;
-                    modalContentInput.value = r.content;
-                    modalCategoryInput.value = r.category;
+                    <div class="reply-content">${escape(r.content)}</div>
+                </div>
+            `).join('');
                 }
-            } else {
-                modalTitle.innerText = 'Add new reply';
-                modalTitleInput.value = '';
-                modalContentInput.value = '';
-                modalCategoryInput.value = '';
-            }
-            modalOverlay.classList.add('show');
-        }
 
-        function saveModal() {
-            const title = modalTitleInput.value.trim();
-            const content = modalContentInput.value.trim();
-            const category = modalCategoryInput.value.trim() || 'uncategorized';
-            if (!title || !content) {
-                alert('Title & content required');
-                return;
+                rebuildPills();
+                updateStats();
             }
-            if (currentEditId) {
-                const r = replies.find(r => r.id === currentEditId);
-                if (r) {
-                    r.title = title;
-                    r.content = content;
-                    r.category = category;
-                }
-            } else {
-                const newId = Date.now().toString() + Math.random().toString(36).substring(2);
-                replies.push({
-                    id: newId,
-                    title,
-                    content,
-                    category,
-                    usageCount: 0,
-                    pinned: false,
-                    createdAt: Date.now()
-                });
-            }
-            saveReplies();
-            modalOverlay.classList.remove('show');
-        }
 
-        function exportData() {
-            const dataStr = JSON.stringify(replies, null, 2);
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `replies-${new Date().toISOString().slice(0,10)}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function importFromFile(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
+            // ─── Copy ─────────────────────────────────────────────
+            async function handleCopy(id) {
+                const r = replies.find(r => r.id === id);
+                if (!r) return;
                 try {
-                    const imported = JSON.parse(e.target.result);
-                    if (Array.isArray(imported)) {
-                        replies = imported;
-                        saveReplies();
-                    } else throw new Error('not array');
-                } catch (er) {
-                    alert('Invalid JSON file');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        // Event Listeners
-        document.addEventListener('click', (e) => {
-            const card = e.target.closest('.reply-card');
-            if (card && !e.target.closest('[data-pin-action]')) {
-                const id = card.dataset.id;
-                handleCopy(id);
+                    await navigator.clipboard.writeText(r.content);
+                    r.usageCount = (r.usageCount || 0) + 1;
+                    save();
+                    showToast('Copied to clipboard!');
+                    // flash animation
+                    const card = document.querySelector(`.reply-card[data-id="${id}"]`);
+                    if (card) { card.classList.remove('copied'); void card.offsetWidth; card.classList.add('copied'); }
+                } catch { showToast('Copy failed!', 'var(--danger)'); }
             }
 
-            if (e.target.closest('[data-pin-action]')) {
-                e.stopPropagation();
-                const id = e.target.closest('[data-pin-action]').dataset.id;
-                togglePin(id);
+            // ─── Pin ──────────────────────────────────────────────
+            function togglePin(id) {
+                const r = replies.find(r => r.id === id);
+                if (r) { r.pinned = !r.pinned; save(); }
             }
-        });
 
-        categoryPills.addEventListener('click', (e) => {
-            const pill = e.target.closest('.category-pill');
-            if (pill) {
-                selectedCategory = pill.dataset.category;
-                render();
+            // ─── Duplicate ────────────────────────────────────────
+            function duplicate(id) {
+                const r = replies.find(r => r.id === id);
+                if (!r) return;
+                const copy = { ...r, id: Date.now().toString() + Math.random().toString(36).slice(2), title: r.title + ' (copy)', pinned: false, usageCount: 0, createdAt: Date.now() };
+                replies.push(copy);
+                save();
+                showToast('Duplicated!');
             }
-        });
 
-        clearSearch.addEventListener('click', () => {
-            searchInput.value = '';
-            render();
-            searchInput.focus();
-        });
+            // ─── Delete ───────────────────────────────────────────
+            function deleteReply(id) {
+                if (!confirm('Delete this reply?')) return;
+                replies = replies.filter(r => r.id !== id);
+                save();
+                showToast('Deleted', 'var(--danger)');
+            }
 
-        searchInput.addEventListener('input', render);
+            // ─── Click handler ────────────────────────────────────
+            document.addEventListener('click', e => {
+                hideCtxMenu();
+                const pin = e.target.closest('[data-pin-action]');
+                if (pin) { e.stopPropagation(); togglePin(pin.dataset.id); return; }
+                const card = e.target.closest('.reply-card');
+                if (card) handleCopy(card.dataset.id);
+            });
 
-        // Ctrl+F to focus search
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'f') {
+            // ─── Context Menu ─────────────────────────────────────
+            function hideCtxMenu() { ctxMenu.classList.remove('open'); }
+
+            document.addEventListener('contextmenu', e => {
+                const card = e.target.closest('.reply-card');
+                if (!card) return;
                 e.preventDefault();
-                searchInput.focus();
-                searchInput.select();
+                ctxTargetId = card.dataset.id;
+                const r = replies.find(r => r.id === ctxTargetId);
+                $('ctxPin').innerHTML = `<i class="fas fa-star"></i> ${r?.pinned ? 'Unpin' : 'Pin'}`;
+                ctxMenu.style.left = Math.min(e.clientX, window.innerWidth - 185) + 'px';
+                ctxMenu.style.top = Math.min(e.clientY, window.innerHeight - 200) + 'px';
+                ctxMenu.classList.add('open');
+            });
+
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') hideCtxMenu(); });
+
+            $('ctxCopy').addEventListener('click', () => { handleCopy(ctxTargetId); hideCtxMenu(); });
+            $('ctxEdit').addEventListener('click', () => { openModal(ctxTargetId); hideCtxMenu(); });
+            $('ctxDuplicate').addEventListener('click', () => { duplicate(ctxTargetId); hideCtxMenu(); });
+            $('ctxPin').addEventListener('click', () => { togglePin(ctxTargetId); hideCtxMenu(); });
+            $('ctxDelete').addEventListener('click', () => { deleteReply(ctxTargetId); hideCtxMenu(); });
+
+            // ─── Modal ────────────────────────────────────────────
+            function openModal(editId = null) {
+                currentEditId = editId;
+                if (editId) {
+                    const r = replies.find(r => r.id === editId);
+                    if (r) {
+                        modalTitleEl.textContent = '✏️ Edit reply';
+                        modalTitleInput.value = r.title;
+                        modalContentInput.value = r.content;
+                        modalCategoryInput.value = r.category;
+                    }
+                } else {
+                    modalTitleEl.textContent = '➕ Add new reply';
+                    modalTitleInput.value = '';
+                    modalContentInput.value = '';
+                    modalCategoryInput.value = '';
+                }
+                modalOverlay.classList.add('show');
+                setTimeout(() => modalTitleInput.focus(), 100);
             }
-        });
 
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-        });
+            function saveModal() {
+                const title = modalTitleInput.value.trim();
+                const content = modalContentInput.value.trim();
+                const category = modalCategoryInput.value.trim() || 'uncategorized';
+                if (!title || !content) { alert('Title & content required'); return; }
+                if (currentEditId) {
+                    const r = replies.find(r => r.id === currentEditId);
+                    if (r) { r.title = title; r.content = content; r.category = category; }
+                } else {
+                    replies.push({ id: Date.now().toString() + Math.random().toString(36).slice(2), title, content, category, usageCount: 0, pinned: false, createdAt: Date.now() });
+                }
+                save();
+                modalOverlay.classList.remove('show');
+                showToast(currentEditId ? 'Saved!' : 'Added!');
+            }
 
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark');
-        }
+            $('addReplyBtn').addEventListener('click', () => openModal());
+            $('modalCancel').addEventListener('click', () => modalOverlay.classList.remove('show'));
+            $('modalSave').addEventListener('click', saveModal);
+            modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) modalOverlay.classList.remove('show'); });
 
-        addReplyBtn.addEventListener('click', () => openModal());
-        modalCancel.addEventListener('click', () => modalOverlay.classList.remove('show'));
-        modalSave.addEventListener('click', saveModal);
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) modalOverlay.classList.remove('show');
-        });
+            // ─── Search ───────────────────────────────────────────
+            searchInput.addEventListener('input', render);
+            clearSearch.addEventListener('click', () => { searchInput.value = ''; render(); searchInput.focus(); });
+            document.addEventListener('keydown', e => {
+                if (e.ctrlKey && e.key === 'f') { e.preventDefault(); searchInput.focus(); searchInput.select(); }
+            });
 
-        exportBtn.addEventListener('click', exportData);
-        importBtn.addEventListener('click', () => importFile.click());
-        importFile.addEventListener('change', (e) => {
-            if (e.target.files[0]) importFromFile(e.target.files[0]);
-        });
+            // ─── Export / Import ──────────────────────────────────
+            $('exportBtn').addEventListener('click', () => {
+                const blob = new Blob([JSON.stringify(replies, null, 2)], { type: 'application/json' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = `replies-${new Date().toISOString().slice(0, 10)}.json`;
+                a.click();
+            });
 
-        // Initial render
-        rebuildCategoryPills();
-        render();
-    })();
-</script>
+            $('importBtn').addEventListener('click', () => $('importFile').click());
+            $('importFile').addEventListener('change', e => {
+                const f = e.target.files[0];
+                if (!f) return;
+                const reader = new FileReader();
+                reader.onload = ev => {
+                    try {
+                        const data = JSON.parse(ev.target.result);
+                        if (!Array.isArray(data)) throw new Error();
+                        replies = data; save();
+                        showToast('Imported successfully!');
+                    } catch { showToast('Invalid JSON file', 'var(--danger)'); }
+                };
+                reader.readAsText(f);
+                e.target.value = '';
+            });
+
+            // ─── Init ─────────────────────────────────────────────
+            applyTheme(currentTheme);
+            render();
+        })();
+    </script>
 </body>
+
 </html>
