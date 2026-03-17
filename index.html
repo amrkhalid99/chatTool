@@ -9,13 +9,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Nunito:wght@400;600;700;800&family=Fira+Code:wght@400;500;600&family=Playfair+Display:wght@400;700&family=Dela+Gothic+One&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Outfit:wght@600;700;800;900&family=Nunito:wght@700;800;900&family=Fira+Code:wght@500;600;700&family=Playfair+Display:wght@700;900&display=swap"
         rel="stylesheet">
 
     <style>
         /* =================== THEME DEFINITIONS =================== */
         :root {
-            --font-ui: 'DM Sans', sans-serif;
+            --font-ui: 'Outfit', sans-serif;
             --font-display: 'Syne', sans-serif;
             --transition-theme: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
         }
@@ -204,7 +204,7 @@
             --ctx-bg: #fdfaf5;
             --logo-a: #8b4513;
             --logo-b: #cc6600;
-            --font-ui: 'DM Sans', sans-serif;
+            --font-ui: 'Outfit', sans-serif;
             --font-display: 'Playfair Display', serif;
         }
 
@@ -279,6 +279,7 @@
 
         body {
             font-family: var(--font-ui);
+            font-weight: 600;
             background-color: var(--bg);
             color: var(--text-primary);
             min-height: 100vh;
@@ -356,6 +357,7 @@
             color: var(--text-primary);
             outline: none;
             font-family: var(--font-ui);
+            font-weight: 600;
         }
 
         .nav-search input::placeholder {
@@ -398,6 +400,7 @@
             font-size: 0.9rem;
             color: var(--text-primary);
             font-family: var(--font-ui);
+            font-weight: 600;
             white-space: nowrap;
         }
 
@@ -447,6 +450,7 @@
             color: var(--text-primary);
             transition: background 0.15s;
             font-family: var(--font-ui);
+            font-weight: 600;
         }
 
         .theme-option:hover {
@@ -513,6 +517,7 @@
             gap: 0.5rem;
             white-space: nowrap;
             font-family: var(--font-ui);
+            font-weight: 600;
         }
 
         .btn-primary {
@@ -559,6 +564,7 @@
             cursor: pointer;
             transition: all 0.2s;
             font-family: var(--font-ui);
+            font-weight: 600;
         }
 
         .category-pill:hover {
@@ -759,6 +765,7 @@
             font-size: 0.9rem;
             color: var(--text-primary);
             font-family: var(--font-ui);
+            font-weight: 600;
             transition: background 0.12s;
         }
 
@@ -845,6 +852,7 @@
             margin-bottom: 1rem;
             font-size: 0.95rem;
             font-family: var(--font-ui);
+            font-weight: 600;
             outline: none;
             transition: border-color 0.2s;
         }
@@ -879,6 +887,7 @@
             gap: 0.75rem;
             z-index: 1200;
             font-family: var(--font-ui);
+            font-weight: 600;
             color: var(--text-primary);
             /* FIXED: use transform instead of display:none */
             transform: translateX(calc(100% + 3rem));
@@ -1208,7 +1217,7 @@
 
                 let filtered = replies.filter(r => {
                     const matchSearch = !term || r.title.toLowerCase().includes(term) || r.content.toLowerCase().includes(term);
-                    const activeCat = catFilter || (selectedCategory !== 'all' ? selectedCategory : null);
+                    const activeCat = catFilter ? catFilter.toLowerCase() : (selectedCategory !== 'all' ? selectedCategory.toLowerCase() : null);
                     const matchCat = !activeCat || r.category.toLowerCase() === activeCat;
                     return matchSearch && matchCat;
                 });
