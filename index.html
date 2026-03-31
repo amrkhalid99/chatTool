@@ -781,10 +781,47 @@
             background: #ff000015;
         }
 
-        .ctx-divider {
-            height: 1px;
-            background: var(--border);
-            margin: 0.3rem 0;
+        /* Delete Confirmation Modal */
+        .delete-modal {
+            max-width: 360px;
+            text-align: center;
+        }
+
+        .delete-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .delete-modal h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.3rem;
+            color: var(--danger);
+        }
+
+        .delete-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin: 0.5rem 0;
+            word-break: break-word;
+            max-height: 60px;
+            overflow: auto;
+        }
+
+        .delete-warning {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 1rem 0;
+        }
+
+        .delete-modal .modal-actions {
+            margin-top: 1.5rem;
         }
 
         /* =================== MODAL =================== */
@@ -859,6 +896,31 @@
 
         .modal input:focus,
         .modal textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .category-input-wrapper {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .category-select {
+            appearance: none;
+            padding-right: 2.5rem !important;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-color: var(--bg);
+        }
+
+        .category-select option {
+            background: var(--surface);
+            color: var(--text-primary);
+            padding: 0.5rem;
+        }
+
+        .category-select:focus {
             border-color: var(--accent);
         }
 
@@ -1049,7 +1111,11 @@
             <h2 id="modalTitle">➕ Add new reply</h2>
             <input type="text" id="modalTitleInput" placeholder="Title" autocomplete="off">
             <textarea id="modalContentInput" rows="5" placeholder="Reply text…"></textarea>
-            <input type="text" id="modalCategoryInput" placeholder="Category">
+            <div class="category-input-wrapper">
+                <select id="modalCategoryInput" class="category-select">
+                    <option value="">Select or create category…</option>
+                </select>
+            </div>
             <div class="modal-actions">
                 <button class="btn" id="modalCancel">Cancel</button>
                 <button class="btn btn-primary" id="modalSave">Save</button>
@@ -1294,12 +1360,45 @@
                 showToast('Duplicated!');
             }
 
-            // ─── Delete ───────────────────────────────────────────
-            function deleteReply(id) {
-                if (!confirm('Delete this reply?')) return;
-                replies = replies.filter(r => r.id !== id);
-                save();
-                showToast('Deleted', 'var(--danger)');
+            // ─── Delete Confirmation Modal ────────────────────────
+            function showDeleteConfirm(id, title) {
+                const deleteModal = document.createElement('div');
+                deleteModal.className = 'modal-overlay';
+                deleteModal.innerHTML = `
+                    <div class="modal delete-modal">
+                        <div class="delete-icon">🗑️</div>
+                        <h3>Delete reply?</h3>
+                        <p class="delete-title">"${escape(title)}"</p>
+                        <p class="delete-warning">This action cannot be undone.</p>
+                        <div class="modal-actions">
+                            <button class="btn" id="confirmCancel">Cancel</button>
+                            <button class="btn btn-danger" id="confirmDelete">Delete</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(deleteModal);
+                
+                deleteModal.classList.add('show');
+                
+                $('confirmCancel').addEventListener('click', () => {
+                    deleteModal.classList.remove('show');
+                    setTimeout(() => deleteModal.remove(), 150);
+                });
+                
+                $('confirmDelete').addEventListener('click', () => {
+                    replies = replies.filter(r => r.id !== id);
+                    save();
+                    deleteModal.classList.remove('show');
+                    setTimeout(() => deleteModal.remove(), 150);
+                    showToast('Deleted', 'var(--danger)');
+                });
+                
+                deleteModal.addEventListener('click', e => {
+                    if (e.target === deleteModal) {
+                        deleteModal.classList.remove('show');
+                        setTimeout(() => deleteModal.remove(), 150);
+                    }
+                });
             }
 
             // ─── Click handler ────────────────────────────────────
@@ -1337,19 +1436,32 @@
             // ─── Modal ────────────────────────────────────────────
             function openModal(editId = null) {
                 currentEditId = editId;
+                
+                // Get all existing categories
+                const existingCategories = [...new Set(replies.map(r => r.category).filter(c => c && c !== 'uncategorized'))];
+                existingCategories.unshift('uncategorized');
+                
+                // Build category options
+                let categoryOptions = existingCategories
+                    .map(cat => `<option value="${escape(cat)}">${escape(cat)}</option>`)
+                    .join('');
+                categoryOptions += '<option value="__new__">➕ Create new category</option>';
+                
+                modalCategoryInput.innerHTML = categoryOptions;
+                
                 if (editId) {
                     const r = replies.find(r => r.id === editId);
                     if (r) {
                         modalTitleEl.textContent = '✏️ Edit reply';
                         modalTitleInput.value = r.title;
                         modalContentInput.value = r.content;
-                        modalCategoryInput.value = r.category;
+                        modalCategoryInput.value = r.category || 'uncategorized';
                     }
                 } else {
                     modalTitleEl.textContent = '➕ Add new reply';
                     modalTitleInput.value = '';
                     modalContentInput.value = '';
-                    modalCategoryInput.value = '';
+                    modalCategoryInput.value = 'uncategorized';
                 }
                 modalOverlay.classList.add('show');
                 setTimeout(() => modalTitleInput.focus(), 100);
@@ -1358,13 +1470,42 @@
             function saveModal() {
                 const title = modalTitleInput.value.trim();
                 const content = modalContentInput.value.trim();
-                const category = modalCategoryInput.value.trim() || 'uncategorized';
-                if (!title || !content) { alert('Title & content required'); return; }
+                let category = modalCategoryInput.value;
+                
+                // If user selected "Create new category"
+                if (category === '__new__') {
+                    category = prompt('Enter new category name:');
+                    if (!category) {
+                        showToast('Category creation cancelled', 'var(--text-secondary)');
+                        return;
+                    }
+                    category = category.trim();
+                    if (!category) {
+                        showToast('Category name cannot be empty', 'var(--danger)');
+                        return;
+                    }
+                }
+                
+                category = category.trim() || 'uncategorized';
+                
+                if (!title || !content) { 
+                    showToast('Title & content required', 'var(--danger)');
+                    return; 
+                }
+                
                 if (currentEditId) {
                     const r = replies.find(r => r.id === currentEditId);
                     if (r) { r.title = title; r.content = content; r.category = category; }
                 } else {
-                    replies.push({ id: Date.now().toString() + Math.random().toString(36).slice(2), title, content, category, usageCount: 0, pinned: false, createdAt: Date.now() });
+                    replies.push({ 
+                        id: Date.now().toString() + Math.random().toString(36).slice(2), 
+                        title, 
+                        content, 
+                        category, 
+                        usageCount: 0, 
+                        pinned: false, 
+                        createdAt: Date.now() 
+                    });
                 }
                 save();
                 modalOverlay.classList.remove('show');
