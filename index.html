@@ -1360,6 +1360,13 @@
                 showToast('Duplicated!');
             }
 
+            // ─── Delete ───────────────────────────────────────────
+            function deleteReply(id) {
+                const r = replies.find(r => r.id === id);
+                if (!r) return;
+                showDeleteConfirm(id, r.title);
+            }
+
             // ─── Delete Confirmation Modal ────────────────────────
             function showDeleteConfirm(id, title) {
                 const deleteModal = document.createElement('div');
@@ -1371,33 +1378,34 @@
                         <p class="delete-title">"${escape(title)}"</p>
                         <p class="delete-warning">This action cannot be undone.</p>
                         <div class="modal-actions">
-                            <button class="btn" id="confirmCancel">Cancel</button>
-                            <button class="btn btn-danger" id="confirmDelete">Delete</button>
+                            <button class="btn btn-cancel">Cancel</button>
+                            <button class="btn btn-danger btn-delete">Delete</button>
                         </div>
                     </div>
                 `;
                 document.body.appendChild(deleteModal);
-                
                 deleteModal.classList.add('show');
                 
-                $('confirmCancel').addEventListener('click', () => {
+                const cancelBtn = deleteModal.querySelector('.btn-cancel');
+                const deleteBtn = deleteModal.querySelector('.btn-delete');
+                
+                function closeModal() {
                     deleteModal.classList.remove('show');
                     setTimeout(() => deleteModal.remove(), 150);
-                });
+                }
                 
-                $('confirmDelete').addEventListener('click', () => {
+                cancelBtn.addEventListener('click', closeModal);
+                
+                deleteBtn.addEventListener('click', () => {
                     replies = replies.filter(r => r.id !== id);
                     save();
-                    deleteModal.classList.remove('show');
-                    setTimeout(() => deleteModal.remove(), 150);
+                    closeModal();
+                    render();
                     showToast('Deleted', 'var(--danger)');
                 });
                 
                 deleteModal.addEventListener('click', e => {
-                    if (e.target === deleteModal) {
-                        deleteModal.classList.remove('show');
-                        setTimeout(() => deleteModal.remove(), 150);
-                    }
+                    if (e.target === deleteModal) closeModal();
                 });
             }
 
