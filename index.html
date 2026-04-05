@@ -578,6 +578,20 @@
             border-color: var(--accent);
         }
 
+        .category-pill[data-editable-cat] {
+            cursor: context-menu;
+        }
+
+        .category-pill[data-editable-cat]:hover {
+            opacity: 0.8;
+            border-color: var(--danger);
+        }
+
+        .category-ctx-menu {
+            position: fixed;
+            z-index: 10000;
+        }
+
         /* Replies Grid */
         .replies-grid {
             display: grid;
@@ -1253,10 +1267,20 @@
             function rebuildPills() {
                 const cats = ['all', ...new Set(replies.map(r => r.category))].sort();
                 categoryPills.innerHTML = cats.map(cat => `
-            <span class="category-pill ${selectedCategory === cat ? 'active' : ''}" data-category="${cat}">
+            <span class="category-pill ${selectedCategory === cat ? 'active' : ''}" data-category="${cat}" ${cat !== 'all' ? `data-editable-cat="${cat}"` : ''}>
                 ${cat === 'all' ? 'All' : cat}
             </span>
         `).join('');
+                
+                // Add right-click menu to category pills
+                document.querySelectorAll('[data-editable-cat]').forEach(pill => {
+                    pill.addEventListener('contextmenu', e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const catName = pill.dataset.editableCat;
+                        showCategoryMenu(catName, e.clientX, e.clientY);
+                    });
+                });
             }
 
             categoryPills.addEventListener('click', e => {
@@ -1365,6 +1389,165 @@
                 const r = replies.find(r => r.id === id);
                 if (!r) return;
                 showDeleteConfirm(id, r.title);
+            }
+
+            // ─── Category Edit Menu ───────────────────────────────
+            function showCategoryMenu(categoryName, x, y) {
+                // Remove existing menu if any
+                const existing = document.querySelector('.category-ctx-menu');
+                if (existing) existing.remove();
+                
+                const menu = document.createElement('div');
+                menu.className = 'category-ctx-menu ctx-menu open';
+                menu.innerHTML = `
+                    <div class="ctx-item" data-action="rename">
+                        <i class="fas fa-edit"></i> Rename
+                    </div>
+                    <div class="ctx-item danger" data-action="delete">
+                        <i class="fas fa-trash"></i> Delete Category
+                    </div>
+                `;
+                
+                menu.style.left = Math.min(x, window.innerWidth - 200) + 'px';
+                menu.style.top = Math.min(y, window.innerHeight - 150) + 'px';
+                
+                document.body.appendChild(menu);
+                
+                menu.querySelector('[data-action="rename"]').addEventListener('click', () => {
+                    menu.remove();
+                    renameCategoryModal(categoryName);
+                });
+                
+                menu.querySelector('[data-action="delete"]').addEventListener('click', () => {
+                    menu.remove();
+                    deleteCategoryConfirm(categoryName);
+                });
+                
+                // Close menu on click outside
+                document.addEventListener('click', function closeMenuHandler() {
+                    menu.remove();
+                    document.removeEventListener('click', closeMenuHandler);
+                });
+            }
+            
+            // ─── Rename Category Modal ────────────────────────────
+            function renameCategoryModal(oldName) {
+                const renameModal = document.createElement('div');
+                renameModal.className = 'modal-overlay';
+                renameModal.innerHTML = `
+                    <div class="modal">
+                        <h2>Rename Category</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">From: <strong>${escape(oldName)}</strong></p>
+                        <input type="text" id="newCategoryName" placeholder="New category name" value="${escape(oldName)}" autocomplete="off">
+                        <div class="modal-actions">
+                            <button class="btn btn-cancel-rename">Cancel</button>
+                            <button class="btn btn-primary btn-confirm-rename">Rename</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(renameModal);
+                renameModal.classList.add('show');
+                
+                const input = renameModal.querySelector('#newCategoryName');
+                input.focus();
+                input.select();
+                
+                function closeRenameModal() {
+                    renameModal.classList.remove('show');
+                    setTimeout(() => renameModal.remove(), 150);
+                }
+                
+                renameModal.querySelector('.btn-cancel-rename').addEventListener('click', closeRenameModal);
+                
+                renameModal.querySelector('.btn-confirm-rename').addEventListener('click', () => {
+                    const newName = input.value.trim();
+                    if (!newName) {
+                        showToast('Category name cannot be empty', 'var(--danger)');
+                        return;
+                    }
+                    if (newName === oldName) {
+                        closeRenameModal();
+                        return;
+                    }
+                    
+                    // Check if new name already exists
+                    const exists = replies.some(r => r.category.toLowerCase() === newName.toLowerCase() && r.category !== oldName);
+                    if (exists) {
+                        showToast('Category already exists', 'var(--danger)');
+                        return;
+                    }
+                    
+                    // Rename all replies in this category
+                    replies.forEach(r => {
+                        if (r.category === oldName) {
+                            r.category = newName;
+                        }
+                    });
+                    
+                    save();
+                    closeRenameModal();
+                    render();
+                    showToast(`Category renamed to "${newName}"`, 'var(--success)');
+                });
+                
+                input.addEventListener('keypress', e => {
+                    if (e.key === 'Enter') {
+                        renameModal.querySelector('.btn-confirm-rename').click();
+                    }
+                });
+                
+                renameModal.addEventListener('click', e => {
+                    if (e.target === renameModal) closeRenameModal();
+                });
+            }
+            
+            // ─── Delete Category Confirmation ──────────────────────
+            function deleteCategoryConfirm(categoryName) {
+                const count = replies.filter(r => r.category === categoryName).length;
+                
+                const deleteModal = document.createElement('div');
+                deleteModal.className = 'modal-overlay';
+                deleteModal.innerHTML = `
+                    <div class="modal delete-modal">
+                        <div class="delete-icon">⚠️</div>
+                        <h3>Delete category?</h3>
+                        <p class="delete-title">"${escape(categoryName)}"</p>
+                        <p class="delete-warning">This will move ${count} ${count === 1 ? 'reply' : 'replies'} to "uncategorized".</p>
+                        <div class="modal-actions">
+                            <button class="btn btn-cancel-cat-delete">Cancel</button>
+                            <button class="btn btn-danger btn-confirm-cat-delete">Delete</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(deleteModal);
+                deleteModal.classList.add('show');
+                
+                function closeDeleteModal() {
+                    deleteModal.classList.remove('show');
+                    setTimeout(() => deleteModal.remove(), 150);
+                }
+                
+                deleteModal.querySelector('.btn-cancel-cat-delete').addEventListener('click', closeDeleteModal);
+                
+                deleteModal.querySelector('.btn-confirm-cat-delete').addEventListener('click', () => {
+                    // Move all replies in this category to uncategorized
+                    replies.forEach(r => {
+                        if (r.category === categoryName) {
+                            r.category = 'uncategorized';
+                        }
+                    });
+                    
+                    save();
+                    closeDeleteModal();
+                    render();
+                    showToast(`Category "${categoryName}" deleted`, 'var(--danger)');
+                });
+                
+                deleteModal.addEventListener('click', e => {
+                    if (e.target === deleteModal) closeDeleteModal();
+                });
             }
 
             // ─── Delete Confirmation Modal ────────────────────────
