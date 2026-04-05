@@ -43,7 +43,7 @@
     "content": "بنعتذر لحضرتك جدا بخصوص اي شئ مضايق حضرتك ",
     "category": "help",
     "pinned": true,
-    "usageCount": 46
+    "usageCount": 47
   },
   {
     "id": "7",
@@ -103,7 +103,7 @@
     "id": "14",
     "title": "acvtive",
     "content": "تم تفعيل الخط لحضرتك يا فندم",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
@@ -118,7 +118,7 @@
     "id": "16",
     "title": "B2B",
     "content": "حضرتك بترجع للمفوض وهو بيقدر يساعد حضرتك ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 3
   },
@@ -126,14 +126,14 @@
     "id": "17",
     "title": "Q?",
     "content": "رقم الواتساب اللي بنتواصل منه مش مشترك مع اورنج ممكن نوضح الرقم اللي بنستفسر عنه ؟",
-    "category": "support",
+    "category": "Greating",
     "pinned": false,
     "usageCount": 1
   },
   {
     "id": "18",
     "title": "help",
-    "content": "ممكن توضحلي الاستفسار بشكل ادق عشان اقدر اساعد حضرتك ؟",
+    "content": "ممكن توضحلي طلبك أكتر عشان أقدر أساعدك بشكل أدق؟",
     "category": "Greating",
     "pinned": true,
     "usageCount": 24
@@ -142,7 +142,7 @@
     "id": "19",
     "title": "TRP",
     "content": "حضرتك تقدر تمشي على الخطوات دي ولو في اي عطل ارجعلنا ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 1
   },
@@ -150,21 +150,21 @@
     "id": "20",
     "title": "SIM serial",
     "content": "تقدر تعرف منه الرقم المسلسل #119# ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "21",
     "title": "SIM serial",
     "content": "الرقم المسلسل بيكون مكتوب في ضهر الخط استاذنك وضحه",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "22",
     "title": "Voluntary Suspension",
     "content": "ممكن الاسم رباعي و الرقم القومي و العنوان و تاريخ الميلاد ؟",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 2
   },
@@ -172,14 +172,14 @@
     "id": "23",
     "title": "Voluntary Suspension",
     "content": "تم تفعيل الخط لحضرتك يا فندم و هيتشغل مع حضرتك خلال ساعة يا فندم",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "24",
     "title": "Alerting",
     "content": "كمان نقدر نتحكم في خدمات رسايل المعلومات عن طريق الكود #8888# مجاناً في أي وقت.\nوممكن إلغاء بعض خدمات اورنچ عن طريق الكود الموحد #155*",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 9
   },
@@ -187,49 +187,49 @@
     "id": "25",
     "title": "network",
     "content": "ممكن اسكرين من شكل الشبكة ظاهرة ازاي في تليفون حضرتك ؟",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "26",
     "title": "slow",
     "content": "عفوا يا فندم بس ممكن اعرف عنوان حضرتك عشان اعرف المشكلة عامة ولا عند حضرتك فقط ؟",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "27",
     "title": "wallet",
     "content": "حضرتك تقدر تعرف هل عندك محافظ بنكية او لا عن طريق لينك \"ميزة\" من جوجل او تطبيق ماي نترا NTRA",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "28",
     "title": "Port out",
     "content": "تابع مع الشركة الاخري اللي حضرتك حولت ليها",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "29",
     "title": "Port out",
     "content": "أنا متفهم جدًا إن حضرتك متضايق، وحقك علينا لو حصل أي حاجة خلتك توصل للإحساس ده.وجودك معانا مهم جدًا بالنسبة لنا، ومش حابين نخسرك بأي شكل.",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "30",
     "title": "Shop",
     "content": " https://shop.orange.eg/en/mobiles ممكن نتابع من خلال الموقع ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "31",
     "title": "المستحقات",
     "content": "لمعرفة المبلغ المستحق لخدمة سلفني برجاء الإتصال بالكود #444# أو #16# أو #155*",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 3
   },
@@ -237,7 +237,7 @@
     "id": "33",
     "title": "language",
     "content": "حضرتك تقدر تغير اللغة الخاصة بالخدمة الصوتية عن طريق انك تكلم 400",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 4
   },
@@ -245,7 +245,7 @@
     "id": "34",
     "title": "language",
     "content": "للمتابعة اضغط 1 للمتابعة اضغط * للاعدادات و المتابعة اضغط 4 لتغير اللغة اضغط 1",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 1
   },
@@ -253,42 +253,42 @@
     "id": "35",
     "title": "PUK",
     "content": "للمتابعة اضغط 1 للمتابعة اضغط * للاعدادات و المتابعة اضغط 4 لمعرفة ال puk اضغط 2",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "36",
     "title": "freeze UR line ",
     "content": "ممكن توضحلي اي سبب الايقاف ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "37",
     "title": "freeze UR line ",
     "content": "و حابب اوضح الخط هيفضل مقفول لحين توجه حضرتك للفرع لاستبدال شريحة",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "38",
     "title": "Roaming",
     "content": "حضرتك مسافر فين يا فندم و هل فيه ترانزيت ولا لا ؟",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "39",
     "title": "balance sys",
     "content": "الرصيد المضاف من خلالنا او بمعني اصح تعويض الرصيد من خلالنا غير صالح لتجديد باقة يا فندم تقدر تشحن رصيد صافي لتجديد او الاشتراك في اي عرض ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "40",
     "title": "balance sys",
     "content": "بنعتذر جدا بس العملية حضرتك عملتها من نصف ساعة و العملية بتكون واضحه م خلانا في خلال ساعة على قاعدة البيانت محتاج من حضرتك تكلمنا مرة فيي خلال الساعات الجاية تكون وضحت العملية عشان نقدر نوضحها ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 5
   },
@@ -296,14 +296,14 @@
     "id": "41",
     "title": "units",
     "content": "عشان الوحدات نقدر نستخدمهم دقايق و نت ومفيش امكانية نتحكم فيهم",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "42",
     "title": "All in One",
     "content": "حضرتك اتصل ب 400 و اختار النظام اللي حضرتك تعاقدت عليه في الفرع ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 1
   },
@@ -311,7 +311,7 @@
     "id": "43",
     "title": "active raseed",
     "content": "تمام حضرتك هتقوم بتفعيل الخطوات التنشيطية التالية و في حالة استمرار المشكلة بتتواصل معانا مرة اخرى حضرتك بتقوم بغلق بيانات الهاتف و جميع التطبيقات المفتوحه بالخلفيه و بعدها نفعل وضع الطيران لمدة 10 ثواني و نرجع نغلق وضع الطيران و نطلب الكود #57# للتنشييط ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 5
   },
@@ -343,21 +343,21 @@
     "id": "47",
     "title": "data line",
     "content": "حابب اوضح لحضرتك ان خط الداتا بيكون فقط مخصص للداتا و اجهزتها زي الماي فاي و الهوم وايرلسو بالتالي بيكون غير متاح ان احنا نحول الخط من داتا لخط عادي حضرتك تقدر تشرفنا في الفروع و تشتري خط ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "48",
     "title": "promise",
     "content": "تم تقديم طلب لحضرتك بتأجيل الفاتورة يا فندم و هيتم التواصل في خلال 24 ساعة ",
-    "category": "support",
+    "category": "TRP",
     "pinned": false
   },
   {
     "id": "49",
     "title": "sry",
     "content": "أحب في البداية أعتذر لحضرتك عن أي إزعاج حصل. وارد إن اللي حصل كان خطأ تقني غير مقصود، ومش تقصير من أي حد بشكل شخصي. إحنا هنا موجودين علشان نساعد حضرتك ونحل الموضوع بأسرع وقت، يهمنا جداً رضا حضرتك، وأي ملاحظة من حضرتك بتساعدنا نطوّر الخدمة للأفضل.",
-    "category": "support",
+    "category": "TRP",
     "pinned": false,
     "usageCount": 1
   },
@@ -529,7 +529,7 @@
     "content": "ارضاءا لحضرتك يا فندم هيتم تعويض حضرتك ب 2000 ميجا صالحين لمدة اسبوع و بعتذر جدا بخصوص اي شئ ضايق حضرتك ",
     "category": "compansation",
     "pinned": false,
-    "usageCount": 4
+    "usageCount": 5
   },
   {
     "id": "79",
@@ -997,5 +997,122 @@
     "usageCount": 0,
     "pinned": false,
     "createdAt": 1775173276658
+  },
+  {
+    "id": "1775363156910i0uiqvx9i5d",
+    "title": "a",
+    "content": "بعتذر لحضرتك جدًا عن التجربة اللي مريتها، وأنا متفهم قد إيه الموضوع ده ممكن يكون سبب إزعاج لحضرتك، وإن شاء الله هفضل معاك لحد ما نحل الموضوع بالكامل.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775363156910
+  },
+  {
+    "id": "1775363168337btiek5ufjhw",
+    "title": "a",
+    "content": "أنا آسف جدًا لحضرتك، وأقدر انزعاجك من اللي حصل، وأحب أطمنك إننا مهتمين جدًا بحل المشكلة في أسرع وقت ومش هنسيب الموضوع غير لما يتحل بشكل يرضي حضرتك.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775363168337
+  },
+  {
+    "id": "1775363187792yv18ci6ep7",
+    "title": "a",
+    "content": "أنا آسف جدًا لحضرتك، وأقدر انزعاجك من اللي حصل، وأحب أطمنك إننا مهتمين جدًا بحل المشكلة في أسرع وقت ومش هنسيب الموضوع غير لما يتحل بشكل يرضي حضرتك.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775363187792
+  },
+  {
+    "id": "1775363196305fc9qhzl3gcn",
+    "title": "a",
+    "content": "بعتذر لحضرتك جدًا عن الموقف ده، حتى لو الموضوع خارج عن إرادتنا، لكن أكيد دورنا نساعدك ونوصل لأفضل حل ممكن ليك.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775363196305
+  },
+  {
+    "id": "17753632070887dct4k8ixho",
+    "title": "a",
+    "content": "متقلقش، أنا معاك ومش هسيب الموضوع غير لما نحلّه، وبعتذر لحضرتك مرة تانية عن أي إزعاج حصل.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775363207088
+  },
+  {
+    "id": "177536328518902aqtcczhb6t",
+    "title": "a",
+    "content": "بعتذر لحضرتك جدًا عن بطء سرعة الإنترنت، ومتفاهم قد إيه الموضوع ده ممكن يسبب إزعاج، وإن شاء الله نشتغل على تحسين الخدمة في أقرب وقت.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775363285189
+  },
+  {
+    "id": "17753632909725kc967h9jjy",
+    "title": "a",
+    "content": "أنا آسف جدًا عن التجربة دي، وأقدر إن بطء الإنترنت بيكون مزعج جدًا، بس أحب أطمنك إننا شغالين على حل المشكلة وتحسين الجودة.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775363290972
+  },
+  {
+    "id": "1775363297652d78lt9wh5sn",
+    "title": "a",
+    "content": "حقك تضايق من بطء السرعة، وبعتذرلك جدًا عن اللي حصل، خليني أساعدك ونتابع الموضوع مع بعض لحد ما الأداء يتحسن.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775363297652
+  },
+  {
+    "id": "1775363303998nx75jq5hw0k",
+    "title": "a",
+    "content": "بعتذر لحضرتك عن ضعف سرعة الإنترنت، وده أكيد مش المستوى اللي حابين نقدمه، وإن شاء الله نتابع المشكلة ونوصل لحل يرضي حضرتك.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775363303998
+  },
+  {
+    "id": "17753633098620lpdvszeym7c",
+    "title": "a",
+    "content": "متفهم شكوى حضرتك وبعتذر جدًا عن بطء الخدمة، وأوعدك إننا هنتابع الموضوع بشكل مستمر لحد ما تتحسن السرعة وترجع بالشكل الطبيعي.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775363309862
+  },
+  {
+    "id": "1775364075349jdqty9izy2",
+    "title": "a",
+    "content": "متفهم قد إيه الموضوع ده ممكن يكون مزعج، وخليني أساعدك وأحل الموضوع حالًا.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775364075349
+  },
+  {
+    "id": "1775364108341ia4klx11zpo",
+    "title": "solve",
+    "content": "بنعتذر لحضرتك جدا بخصوص اي شئ مضايق حضرتك \nخليني أوضح لك أفضل حل متاح حاليًا ونشوف أنسب اختيار ليك.",
+    "category": "sry",
+    "usageCount": 0,
+    "pinned": true,
+    "createdAt": 1775364108341
+  },
+  {
+    "id": "17753641805429u6q9mm84ko",
+    "title": "verf",
+    "content": "محتاج بعض البيانات من حضرتك عشان أقدر أراجع على الخط وأساعدك بشكل أدق.",
+    "category": "verifcation",
+    "usageCount": 0,
+    "pinned": false,
+    "createdAt": 1775364180542
   }
 ]
