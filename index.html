@@ -523,15 +523,49 @@
         .btn-primary {
             background: var(--accent);
             border-color: var(--accent);
-            color: white;
+            color: #ffffff !important;
         }
 
         .btn:hover {
             background: var(--surface-hover);
+            color: var(--text-primary);
         }
 
         .btn-primary:hover {
+            background: var(--accent) !important;
             filter: brightness(1.15);
+            color: #ffffff !important;
+        }
+
+        /* ── Navigation Tab Switcher ── */
+        .page-nav {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--surface-hover);
+            border-radius: 10px;
+            padding: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .page-nav a {
+            padding: 0.4rem 1rem;
+            border-radius: 7px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            font-family: var(--font-ui);
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.18s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .page-nav a.active,
+        .page-nav a:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
         .btn-danger {
@@ -808,9 +842,26 @@
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
         }
 
         .delete-modal h3 {
@@ -1040,6 +1091,10 @@
         <div class="nav-bar">
             <div class="nav-left">
                 <div class="logo">
+                <div class="page-nav">
+                    <a href="index.html" class="active"><i class="fas fa-bolt"></i> Fast Reply</a>
+                    <a href="index2.html"><i class="fas fa-shield-halved"></i> VAS</a>
+                </div>
                     <h1>⚡ FAST REPLY</h1>
                 </div>
                 <div class="nav-search">
@@ -1271,7 +1326,7 @@
                 ${cat === 'all' ? 'All' : cat}
             </span>
         `).join('');
-                
+
                 // Add right-click menu to category pills
                 document.querySelectorAll('[data-editable-cat]').forEach(pill => {
                     pill.addEventListener('contextmenu', e => {
@@ -1396,7 +1451,7 @@
                 // Remove existing menu if any
                 const existing = document.querySelector('.category-ctx-menu');
                 if (existing) existing.remove();
-                
+
                 const menu = document.createElement('div');
                 menu.className = 'category-ctx-menu ctx-menu open';
                 menu.innerHTML = `
@@ -1407,29 +1462,29 @@
                         <i class="fas fa-trash"></i> Delete Category
                     </div>
                 `;
-                
+
                 menu.style.left = Math.min(x, window.innerWidth - 200) + 'px';
                 menu.style.top = Math.min(y, window.innerHeight - 150) + 'px';
-                
+
                 document.body.appendChild(menu);
-                
+
                 menu.querySelector('[data-action="rename"]').addEventListener('click', () => {
                     menu.remove();
                     renameCategoryModal(categoryName);
                 });
-                
+
                 menu.querySelector('[data-action="delete"]').addEventListener('click', () => {
                     menu.remove();
                     deleteCategoryConfirm(categoryName);
                 });
-                
+
                 // Close menu on click outside
                 document.addEventListener('click', function closeMenuHandler() {
                     menu.remove();
                     document.removeEventListener('click', closeMenuHandler);
                 });
             }
-            
+
             // ─── Rename Category Modal ────────────────────────────
             function renameCategoryModal(oldName) {
                 const renameModal = document.createElement('div');
@@ -1445,21 +1500,21 @@
                         </div>
                     </div>
                 `;
-                
+
                 document.body.appendChild(renameModal);
                 renameModal.classList.add('show');
-                
+
                 const input = renameModal.querySelector('#newCategoryName');
                 input.focus();
                 input.select();
-                
+
                 function closeRenameModal() {
                     renameModal.classList.remove('show');
                     setTimeout(() => renameModal.remove(), 150);
                 }
-                
+
                 renameModal.querySelector('.btn-cancel-rename').addEventListener('click', closeRenameModal);
-                
+
                 renameModal.querySelector('.btn-confirm-rename').addEventListener('click', () => {
                     const newName = input.value.trim();
                     if (!newName) {
@@ -1470,42 +1525,42 @@
                         closeRenameModal();
                         return;
                     }
-                    
+
                     // Check if new name already exists
                     const exists = replies.some(r => r.category.toLowerCase() === newName.toLowerCase() && r.category !== oldName);
                     if (exists) {
                         showToast('Category already exists', 'var(--danger)');
                         return;
                     }
-                    
+
                     // Rename all replies in this category
                     replies.forEach(r => {
                         if (r.category === oldName) {
                             r.category = newName;
                         }
                     });
-                    
+
                     save();
                     closeRenameModal();
                     render();
                     showToast(`Category renamed to "${newName}"`, 'var(--success)');
                 });
-                
+
                 input.addEventListener('keypress', e => {
                     if (e.key === 'Enter') {
                         renameModal.querySelector('.btn-confirm-rename').click();
                     }
                 });
-                
+
                 renameModal.addEventListener('click', e => {
                     if (e.target === renameModal) closeRenameModal();
                 });
             }
-            
+
             // ─── Delete Category Confirmation ──────────────────────
             function deleteCategoryConfirm(categoryName) {
                 const count = replies.filter(r => r.category === categoryName).length;
-                
+
                 const deleteModal = document.createElement('div');
                 deleteModal.className = 'modal-overlay';
                 deleteModal.innerHTML = `
@@ -1520,17 +1575,17 @@
                         </div>
                     </div>
                 `;
-                
+
                 document.body.appendChild(deleteModal);
                 deleteModal.classList.add('show');
-                
+
                 function closeDeleteModal() {
                     deleteModal.classList.remove('show');
                     setTimeout(() => deleteModal.remove(), 150);
                 }
-                
+
                 deleteModal.querySelector('.btn-cancel-cat-delete').addEventListener('click', closeDeleteModal);
-                
+
                 deleteModal.querySelector('.btn-confirm-cat-delete').addEventListener('click', () => {
                     // Move all replies in this category to uncategorized
                     replies.forEach(r => {
@@ -1538,13 +1593,13 @@
                             r.category = 'uncategorized';
                         }
                     });
-                    
+
                     save();
                     closeDeleteModal();
                     render();
                     showToast(`Category "${categoryName}" deleted`, 'var(--danger)');
                 });
-                
+
                 deleteModal.addEventListener('click', e => {
                     if (e.target === deleteModal) closeDeleteModal();
                 });
@@ -1568,17 +1623,17 @@
                 `;
                 document.body.appendChild(deleteModal);
                 deleteModal.classList.add('show');
-                
+
                 const cancelBtn = deleteModal.querySelector('.btn-cancel');
                 const deleteBtn = deleteModal.querySelector('.btn-delete');
-                
+
                 function closeModal() {
                     deleteModal.classList.remove('show');
                     setTimeout(() => deleteModal.remove(), 150);
                 }
-                
+
                 cancelBtn.addEventListener('click', closeModal);
-                
+
                 deleteBtn.addEventListener('click', () => {
                     replies = replies.filter(r => r.id !== id);
                     save();
@@ -1586,7 +1641,7 @@
                     render();
                     showToast('Deleted', 'var(--danger)');
                 });
-                
+
                 deleteModal.addEventListener('click', e => {
                     if (e.target === deleteModal) closeModal();
                 });
@@ -1627,19 +1682,19 @@
             // ─── Modal ────────────────────────────────────────────
             function openModal(editId = null) {
                 currentEditId = editId;
-                
+
                 // Get all existing categories
                 const existingCategories = [...new Set(replies.map(r => r.category).filter(c => c && c !== 'uncategorized'))];
                 existingCategories.unshift('uncategorized');
-                
+
                 // Build category options
                 let categoryOptions = existingCategories
                     .map(cat => `<option value="${escape(cat)}">${escape(cat)}</option>`)
                     .join('');
                 categoryOptions += '<option value="__new__">➕ Create new category</option>';
-                
+
                 modalCategoryInput.innerHTML = categoryOptions;
-                
+
                 if (editId) {
                     const r = replies.find(r => r.id === editId);
                     if (r) {
@@ -1662,7 +1717,7 @@
                 const title = modalTitleInput.value.trim();
                 const content = modalContentInput.value.trim();
                 let category = modalCategoryInput.value;
-                
+
                 // If user selected "Create new category"
                 if (category === '__new__') {
                     category = prompt('Enter new category name:');
@@ -1676,26 +1731,26 @@
                         return;
                     }
                 }
-                
+
                 category = category.trim() || 'uncategorized';
-                
-                if (!title || !content) { 
+
+                if (!title || !content) {
                     showToast('Title & content required', 'var(--danger)');
-                    return; 
+                    return;
                 }
-                
+
                 if (currentEditId) {
                     const r = replies.find(r => r.id === currentEditId);
                     if (r) { r.title = title; r.content = content; r.category = category; }
                 } else {
-                    replies.push({ 
-                        id: Date.now().toString() + Math.random().toString(36).slice(2), 
-                        title, 
-                        content, 
-                        category, 
-                        usageCount: 0, 
-                        pinned: false, 
-                        createdAt: Date.now() 
+                    replies.push({
+                        id: Date.now().toString() + Math.random().toString(36).slice(2),
+                        title,
+                        content,
+                        category,
+                        usageCount: 0,
+                        pinned: false,
+                        createdAt: Date.now()
                     });
                 }
                 save();

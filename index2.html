@@ -4,11 +4,1295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>⚡ FAST REPLY · VAS Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Outfit:wght@600;700;800;900&family=Nunito:wght@700;800;900&family=Fira+Code:wght@500;600;700&family=Playfair+Display:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =================== THEME DEFINITIONS =================== */
+        :root {
+            --font-ui: 'Outfit', sans-serif;
+            --font-display: 'Syne', sans-serif;
+            --transition-theme: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        [data-theme="light"] {
+            --bg: #f6f9fc;
+            --surface: #ffffff;
+            --surface-hover: #f2f5f9;
+            --border: #e2e8f0;
+            --text-primary: #1a2b3e;
+            --text-secondary: #4a5a6e;
+            --accent: #2563eb;
+            --accent-soft: #dbeafe;
+            --danger: #dc2626;
+            --success: #059669;
+            --pinned-star: #fbbf24;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, .07);
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            --ctx-bg: #ffffff;
+            --logo-a: #ff6600;
+            --logo-b: #ff9900;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface-hover: #2d3a4f;
+            --border: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #b0c4de;
+            --accent: #3b82f6;
+            --accent-soft: #1e3a5f;
+            --danger: #f87171;
+            --success: #34d399;
+            --pinned-star: #fbbf24;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, .5);
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+            --ctx-bg: #1e293b;
+            --logo-a: #fb923c;
+            --logo-b: #fbbf24;
+        }
+
+        [data-theme="midnight"] {
+            --bg: #0d0d1a;
+            --surface: #14142b;
+            --surface-hover: #1e1e3f;
+            --border: #2d2d5e;
+            --text-primary: #e8e8ff;
+            --text-secondary: #9090cc;
+            --accent: #7c3aed;
+            --accent-soft: #2d1b5e;
+            --danger: #f87171;
+            --success: #a78bfa;
+            --pinned-star: #fbbf24;
+            --shadow: 0 10px 30px rgba(124, 58, 237, .3);
+            --card-shadow: 0 4px 16px rgba(124, 58, 237, .15);
+            --ctx-bg: #14142b;
+            --logo-a: #a78bfa;
+            --logo-b: #f472b6;
+            --font-ui: 'Space Mono', monospace;
+            --font-display: 'Space Mono', monospace;
+        }
+
+        [data-theme="cyberpunk"] {
+            --bg: #0a0a0f;
+            --surface: #111118;
+            --surface-hover: #1a1a28;
+            --border: #00ff9f33;
+            --text-primary: #00ff9f;
+            --text-secondary: #00cc7f;
+            --accent: #ff00aa;
+            --accent-soft: #ff00aa22;
+            --danger: #ff4444;
+            --success: #00ff9f;
+            --pinned-star: #ffee00;
+            --shadow: 0 0 20px #ff00aa44;
+            --card-shadow: 0 0 10px #00ff9f22;
+            --ctx-bg: #111118;
+            --logo-a: #00ff9f;
+            --logo-b: #ff00aa;
+            --font-ui: 'Fira Code', monospace;
+            --font-display: 'Fira Code', monospace;
+        }
+
+        [data-theme="anime"] {
+            --bg: #fff0f5;
+            --surface: #ffffff;
+            --surface-hover: #ffe4ef;
+            --border: #ffc0d9;
+            --text-primary: #5c2a45;
+            --text-secondary: #a06080;
+            --accent: #e91e8c;
+            --accent-soft: #ffd6eb;
+            --danger: #ff4466;
+            --success: #22c55e;
+            --pinned-star: #ff9800;
+            --shadow: 0 8px 24px rgba(233, 30, 140, .12);
+            --card-shadow: 0 2px 12px rgba(233, 30, 140, .08);
+            --ctx-bg: #ffffff;
+            --logo-a: #e91e8c;
+            --logo-b: #9c27b0;
+            --font-ui: 'Nunito', sans-serif;
+            --font-display: 'Nunito', sans-serif;
+        }
+
+        [data-theme="forest"] {
+            --bg: #0f1f0f;
+            --surface: #162016;
+            --surface-hover: #1f2e1f;
+            --border: #2d4a2d;
+            --text-primary: #d4edda;
+            --text-secondary: #8fbc8f;
+            --accent: #4caf50;
+            --accent-soft: #1a3a1a;
+            --danger: #ff6b6b;
+            --success: #69f0ae;
+            --pinned-star: #ffd54f;
+            --shadow: 0 10px 25px rgba(0, 0, 0, .5);
+            --card-shadow: 0 4px 16px rgba(76, 175, 80, .1);
+            --ctx-bg: #162016;
+            --logo-a: #69f0ae;
+            --logo-b: #4caf50;
+        }
+
+        [data-theme="sunset"] {
+            --bg: #1a0a00;
+            --surface: #2a1200;
+            --surface-hover: #3a1e00;
+            --border: #6b3000;
+            --text-primary: #ffe8cc;
+            --text-secondary: #ffaa66;
+            --accent: #ff6600;
+            --accent-soft: #4a1a00;
+            --danger: #ff4444;
+            --success: #ffcc00;
+            --pinned-star: #ffcc00;
+            --shadow: 0 10px 30px rgba(255, 102, 0, .3);
+            --card-shadow: 0 4px 16px rgba(255, 102, 0, .15);
+            --ctx-bg: #2a1200;
+            --logo-a: #ff6600;
+            --logo-b: #ff9900;
+        }
+
+        [data-theme="ocean"] {
+            --bg: #001824;
+            --surface: #002233;
+            --surface-hover: #003044;
+            --border: #0066aa55;
+            --text-primary: #c0eeff;
+            --text-secondary: #60aacc;
+            --accent: #00aaff;
+            --accent-soft: #002244;
+            --danger: #ff6688;
+            --success: #00ffcc;
+            --pinned-star: #ffdd44;
+            --shadow: 0 10px 30px rgba(0, 170, 255, .2);
+            --card-shadow: 0 4px 16px rgba(0, 170, 255, .1);
+            --ctx-bg: #002233;
+            --logo-a: #00aaff;
+            --logo-b: #00ffcc;
+        }
+
+        [data-theme="paper"] {
+            --bg: #f5f0e8;
+            --surface: #faf7f0;
+            --surface-hover: #ede8dc;
+            --border: #d4c9b0;
+            --text-primary: #3d2b1f;
+            --text-secondary: #7a6652;
+            --accent: #8b4513;
+            --accent-soft: #e8d9c0;
+            --danger: #c0392b;
+            --success: #2e7d32;
+            --pinned-star: #f39c12;
+            --shadow: 0 4px 16px rgba(139, 69, 19, .12);
+            --card-shadow: 0 2px 8px rgba(139, 69, 19, .08);
+            --ctx-bg: #faf7f0;
+            --logo-a: #8b4513;
+            --logo-b: #cc6600;
+            --font-ui: 'Playfair Display', serif;
+            --font-display: 'Playfair Display', serif;
+        }
+
+        [data-theme="mono"] {
+            --bg: #111111;
+            --surface: #1a1a1a;
+            --surface-hover: #222222;
+            --border: #333333;
+            --text-primary: #ffffff;
+            --text-secondary: #aaaaaa;
+            --accent: #ffffff;
+            --accent-soft: #2a2a2a;
+            --danger: #ff4444;
+            --success: #44ff44;
+            --pinned-star: #ffee00;
+            --shadow: 0 4px 20px rgba(0, 0, 0, .8);
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, .6);
+            --ctx-bg: #1a1a1a;
+            --logo-a: #ffffff;
+            --logo-b: #888888;
+            --font-ui: 'Space Mono', monospace;
+            --font-display: 'Space Mono', monospace;
+        }
+
+        [data-theme="nord"] {
+            --bg: #2e3440;
+            --surface: #3b4252;
+            --surface-hover: #434c5e;
+            --border: #4c566a;
+            --text-primary: #eceff4;
+            --text-secondary: #d8dee9;
+            --accent: #88c0d0;
+            --accent-soft: #3b4252;
+            --danger: #bf616a;
+            --success: #a3be8c;
+            --pinned-star: #ebcb8b;
+            --shadow: 0 8px 24px rgba(0, 0, 0, .4);
+            --card-shadow: 0 2px 12px rgba(0, 0, 0, .3);
+            --ctx-bg: #3b4252;
+            --logo-a: #88c0d0;
+            --logo-b: #b48ead;
+        }
+
+        [data-theme="lava"] {
+            --bg: #110000;
+            --surface: #1a0000;
+            --surface-hover: #2a0500;
+            --border: #4a0a00;
+            --text-primary: #ffccaa;
+            --text-secondary: #ff6644;
+            --accent: #ff2200;
+            --accent-soft: #2a0500;
+            --danger: #ff4422;
+            --success: #ff9900;
+            --pinned-star: #ffcc00;
+            --shadow: 0 10px 30px rgba(255, 34, 0, .3);
+            --card-shadow: 0 4px 16px rgba(255, 34, 0, .15);
+            --ctx-bg: #1a0000;
+            --logo-a: #ff4400;
+            --logo-b: #ff9900;
+        }
+
+        /* =================== BASE =================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-ui);
+            font-weight: 600;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 1rem;
+            line-height: 1.5;
+            transition: var(--transition-theme);
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* =================== NAV =================== */
+        .nav-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-theme);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, var(--logo-a), var(--logo-b));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+        }
+
+        /* ── Navigation Tab Switcher ── */
+        .page-nav {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--surface-hover);
+            border-radius: 10px;
+            padding: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .page-nav a {
+            padding: 0.4rem 1rem;
+            border-radius: 7px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            font-family: var(--font-ui);
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.18s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .page-nav a.active,
+        .page-nav a:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-search {
+            display: flex;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 0.4rem 1rem;
+            align-items: center;
+            gap: 8px;
+            min-width: 280px;
+            transition: var(--transition-theme);
+        }
+
+        .nav-search:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .nav-search i {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .nav-search input {
+            border: none;
+            background: transparent;
+            outline: none;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            width: 100%;
+            font-family: var(--font-ui);
+            font-weight: 600;
+        }
+
+        .nav-search input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .clear-search-nav {
+            cursor: pointer;
+            transition: color 0.15s;
+        }
+
+        .clear-search-nav:hover {
+            color: var(--danger);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            font-family: var(--font-ui);
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #ffffff !important;
+        }
+
+        .btn:hover {
+            background: var(--surface-hover);
+            color: var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent) !important;
+            filter: brightness(1.15);
+            color: #ffffff !important;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            filter: brightness(1.1);
+        }
+
+        /* Stats */
+        .stats-mini {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            align-items: center;
+        }
+
+        .stat-mini-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .stat-mini-item i {
+            font-size: 0.8rem;
+        }
+
+        .stat-mini-num {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: var(--font-display);
+        }
+
+        /* Theme Dropdown */
+        .theme-wrapper {
+            position: relative;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            transition: 0.15s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--surface-hover);
+        }
+
+        .theme-dropdown {
+            position: absolute;
+            right: 0;
+            top: calc(100% + 8px);
+            background: var(--ctx-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 6px;
+            z-index: 500;
+            min-width: 180px;
+            box-shadow: var(--shadow);
+            display: none;
+            animation: dropIn 0.15s ease;
+        }
+
+        .theme-dropdown.open {
+            display: block;
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.5rem 0.75rem;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            transition: background 0.15s;
+            font-family: var(--font-ui);
+            font-weight: 600;
+        }
+
+        .theme-option:hover {
+            background: var(--surface-hover);
+        }
+
+        .theme-option.active {
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .theme-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 2px solid var(--border);
+        }
+
+        /* =================== SEARCH PILLS =================== */
+        .category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            align-items: center;
+        }
+
+        .category-pill {
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-ui);
+            font-weight: 600;
+        }
+
+        .category-pill:hover {
+            background: var(--surface-hover);
+            border-color: var(--accent);
+        }
+
+        .category-pill.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* =================== VAS GRID =================== */
+        .vas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* =================== VAS CARD =================== */
+        .vas-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.1rem 1.2rem;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            position: relative;
+            animation: cardIn 0.25s ease both;
+            transition: all 0.2s;
+            overflow: hidden;
+        }
+
+        .vas-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .vas-card.copied {
+            border-color: var(--success);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .vas-title {
+            font-weight: 800;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-family: var(--font-display);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+            direction: auto;
+        }
+
+        .vas-info-preview {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            direction: rtl;
+            text-align: right;
+            line-height: 1.5;
+            opacity: 0.7;
+        }
+
+        /* ── Copy flash indicator ── */
+        .copy-flash {
+            position: absolute;
+            inset: 0;
+            background: var(--accent-soft);
+            border-radius: 14px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .vas-card.copied .copy-flash {
+            opacity: 1;
+        }
+
+        /* ── Tooltip for Description on hover ── */
+        .vas-card .vas-tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--ctx-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            max-width: 320px;
+            min-width: 180px;
+            box-shadow: var(--shadow);
+            z-index: 200;
+            line-height: 1.6;
+            text-align: left;
+            direction: ltr;
+            pointer-events: none;
+        }
+
+        .vas-card .vas-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 7px solid transparent;
+            border-top-color: var(--border);
+        }
+
+        .vas-card:hover .vas-tooltip {
+            display: block;
+            animation: tooltipIn 0.15s ease;
+        }
+
+        @keyframes tooltipIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* ── Card action area ── */
+        .vas-card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 0.7rem;
+            gap: 0.4rem;
+        }
+
+        .vas-copy-hint {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .vas-card:hover .vas-copy-hint {
+            opacity: 1;
+        }
+
+        /* ── Context Menu ── */
+        .ctx-menu {
+            position: fixed;
+            background: var(--ctx-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.4rem;
+            z-index: 9999;
+            min-width: 170px;
+            box-shadow: var(--shadow);
+            display: none;
+            animation: dropIn 0.15s ease;
+        }
+
+        .ctx-menu.open {
+            display: block;
+        }
+
+        .ctx-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.55rem 0.8rem;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-family: var(--font-ui);
+            font-weight: 600;
+            transition: background 0.12s;
+        }
+
+        .ctx-item:hover {
+            background: var(--surface-hover);
+        }
+
+        .ctx-item.danger {
+            color: var(--danger);
+        }
+
+        .ctx-item.danger:hover {
+            background: #ff000015;
+        }
+
+        .ctx-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 0.3rem 0;
+        }
+
+        /* ── Delete Modal ── */
+        .delete-modal {
+            max-width: 360px;
+            text-align: center;
+        }
+
+        .delete-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+
+        .delete-modal h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.3rem;
+            color: var(--danger);
+        }
+
+        .delete-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin: 0.5rem 0;
+            word-break: break-word;
+        }
+
+        .delete-warning {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 1rem 0;
+        }
+
+        /* ── Modal ── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(6px);
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+        }
+
+        .modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal {
+            background: var(--surface);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            animation: modalPop 0.25s ease;
+            transition: var(--transition-theme);
+        }
+
+        .modal h2 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-family: var(--font-display);
+        }
+
+        .modal input,
+        .modal textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            font-family: var(--font-ui);
+            font-weight: 600;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .modal input:focus,
+        .modal textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.95) translateY(10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--surface);
+            border-left: 5px solid var(--success);
+            border: 1px solid var(--border);
+            border-left-width: 5px;
+            border-left-color: var(--success);
+            padding: 0.9rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 1200;
+            font-family: var(--font-ui);
+            font-weight: 600;
+            color: var(--text-primary);
+            transform: translateX(calc(100% + 3rem));
+            transition: transform 0.3s cubic-bezier(.175, .885, .32, 1.275);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            font-size: 1.1rem;
+        }
+
+        /* ── Empty State ── */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state h3 {
+            font-size: 1.4rem;
+            margin: 1rem 0 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .empty-state p {
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes dropIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body data-theme="light">
+    <div class="container">
 
+        <!-- NAV -->
+        <nav class="nav-bar">
+            <div class="nav-left">
+                <!-- Page Switcher -->
+                <div class="page-nav">
+                    <a href="index.html"><i class="fas fa-bolt"></i> Fast Reply</a>
+                    <a href="index2.html" class="active"><i class="fas fa-shield-halved"></i> VAS</a>
+                </div>
+                <div class="logo">
+                    <h1>🛡️ VAS HUB</h1>
+                </div>
+                <div class="nav-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search VAS…" autofocus>
+                    <i class="fas fa-times clear-search-nav" id="clearSearch"></i>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <!-- Stats -->
+                <div class="stats-mini">
+                    <div class="stat-mini-item">
+                        <i class="fas fa-shield-halved" style="color:var(--accent)"></i>
+                        <span class="stat-mini-num" id="totalVas">0</span>
+                        <span>items</span>
+                    </div>
+                </div>
+
+                <!-- Theme Dropdown -->
+                <div class="theme-wrapper">
+                    <div class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-palette"></i>
+                        <span id="themeLabel">Light</span>
+                        <i class="fas fa-chevron-down" style="font-size:.7rem"></i>
+                    </div>
+                    <div class="theme-dropdown" id="themeDropdown"></div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Category Pills -->
+        <div class="category-pills" id="categoryPills"></div>
+
+        <!-- VAS Grid -->
+        <div id="vasContainer" class="vas-grid"></div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMsg">Copied!</span>
+    </div>
+
+    <!-- Context Menu -->
+    <div id="ctxMenu" class="ctx-menu">
+        <div class="ctx-item" id="ctxCopy"><i class="fas fa-copy"></i> Copy</div>
+        <div class="ctx-divider"></div>
+        <div class="ctx-item danger" id="ctxDelete"><i class="fas fa-trash"></i> Delete</div>
+    </div>
+
+    <script>
+        (function () {
+            const STORAGE_KEY = 'vasData_v1';
+            const THEME_KEY = 'fastReplyTheme';
+
+            // ── Themes ──────────────────────────────────────────────────
+            const THEMES = [
+                { id: 'light', label: 'Light', icon: '☀️', dot: ['#f6f9fc', '#2563eb'] },
+                { id: 'dark', label: 'Dark', icon: '🌙', dot: ['#0f172a', '#3b82f6'] },
+                { id: 'midnight', label: 'Midnight', icon: '🔮', dot: ['#0d0d1a', '#7c3aed'] },
+                { id: 'cyberpunk', label: 'Cyberpunk', icon: '🤖', dot: ['#0a0a0f', '#ff00aa'] },
+                { id: 'anime', label: 'Sakura', icon: '🌸', dot: ['#fff0f5', '#e91e8c'] },
+                { id: 'forest', label: 'Forest', icon: '🌿', dot: ['#0f1f0f', '#4caf50'] },
+                { id: 'sunset', label: 'Sunset', icon: '🌅', dot: ['#1a0a00', '#ff6600'] },
+                { id: 'ocean', label: 'Ocean', icon: '🌊', dot: ['#001824', '#00aaff'] },
+                { id: 'paper', label: 'Paper', icon: '📜', dot: ['#f5f0e8', '#8b4513'] },
+                { id: 'mono', label: 'Monochrome', icon: '🖤', dot: ['#111111', '#ffffff'] },
+                { id: 'nord', label: 'Nord', icon: '❄️', dot: ['#2e3440', '#88c0d0'] },
+                { id: 'lava', label: 'Lava', icon: '🌋', dot: ['#110000', '#ff2200'] },
+            ];
+
+            const $ = id => document.getElementById(id);
+
+            // ── Theme ────────────────────────────────────────────────────
+            let currentTheme = localStorage.getItem(THEME_KEY) || 'light';
+
+            function applyTheme(id) {
+                currentTheme = id;
+                document.body.setAttribute('data-theme', id);
+                localStorage.setItem(THEME_KEY, id);
+                const t = THEMES.find(t => t.id === id);
+                $('themeLabel').textContent = t ? t.label : id;
+                document.querySelectorAll('.theme-option').forEach(o => {
+                    o.classList.toggle('active', o.dataset.theme === id);
+                });
+            }
+
+            function renderThemeDropdown() {
+                $('themeDropdown').innerHTML = THEMES.map(t => `
+            <div class="theme-option ${t.id === currentTheme ? 'active' : ''}" data-theme="${t.id}">
+                <div class="theme-dot" style="background:linear-gradient(135deg,${t.dot[0]} 50%,${t.dot[1]} 50%)"></div>
+                ${t.icon} ${t.label}
+            </div>
+        `).join('');
+                document.querySelectorAll('.theme-option').forEach(o => {
+                    o.addEventListener('click', () => { applyTheme(o.dataset.theme); $('themeDropdown').classList.remove('open'); });
+                });
+            }
+
+            $('themeToggle').addEventListener('click', e => {
+                e.stopPropagation();
+                $('themeDropdown').classList.toggle('open');
+            });
+
+            document.addEventListener('click', () => $('themeDropdown').classList.remove('open'));
+
+            renderThemeDropdown();
+            applyTheme(currentTheme);
+
+            // ── Data ─────────────────────────────────────────────────────
+            const VAS_JSON = [{ "TITLE": "Mobile Tracing", "INFO": "أسفين لخسارتك وبننصحك نتوجة لأقرب قسم شرطة ليك ويكون معاك الرقم المسلسل بتاع بالموبايل المفقود ونعمل بلاغ والجهة المختصة/النيابة هتخاطب الشركة وإحنا هنرد عليهم بشكل مباشر من غير أي تدخل من العملاء وده بناءً على القرار رقم 13 الصادر من مكتب النائب العام (المساعد للتفتيش القضائي لسنة 2007) وممكن تتابع معاهم أو هيتواصلوا معاك.", "Description": "Mobile Tracing" }, { "TITLE": "Voluntary Suspension", "INFO": "طلب الإيقاف المؤقت بيتنفذ خلال ساعة، ممكن توضيح XXXXX\nلكن عشان نحافظ على الخط ومايتمش إلغائه نهائياً، لازم نعيد تشغيل الخط ونشحن أو نرسل أو نستقبل مكالمة أو رسالة من أي شبكة، أو نستخدم الإنترنت خلال 3 شهور من أخر إستخدام للخط.\nولو محتاجين نوقف الخط فترة أطول من كده لو هيتم السفر، ممكن يتم شراء صلاحية عشان الخط مايتمش إلغائه نهائياً.", "Description": "Voluntary Suspension\nALO & Hybrid\nXXXXX= The needed verification" }, { "TITLE": "Port Out Step 1", "INFO": "يهمنا وجودك معانا\nلو في مشكلة بتواجهك إحنا موجودين عشان نحلها وهيتم التواصل من خلال الرسائل.", "Description": "Port Out\nStep 1 Public\nWith Private Message\nkindly use before providing the Port out details" }, { "TITLE": "Port Out Step 2", "INFO": "نقدر نحول بعد مرور 4 شهور من تشغيل الخط والتحويل بيتم في خلال يوم عمل واحد (غير شامل الجمعة والسبت).\nالتحويل بيتم عن طريق فرع الشبكة المطلوب الإنضمام ليها بالبطاقة الشخصية والخط مايكونش موقوف أو عليه غرامة ونقدر نحول الخط على أي نظام بغض النظر عن النظام إللي الخط عليه حالياً سواء كان الكارت أو إشتراك شهري أو كنترول \nوبالنسبة للفواتير المستحقة يجب سدادها والمبالغ الغير مفوترة بيكون لازم سدادها خلال 30 يوم من إصدار فاتورة التسوية النهائية\n وبعد إتمام التحويل بيكون متاح تقديم طلب مرة تانية بعد 4 شهور وإلغاء أي طلب تحويل بيتم عن طريق فرع الشبكة المطلوب الإنضمام ليها\nونستأذنك توضحلنا سبب التحويل وتأكد إن هيتم عمل اللازم.", "Description": "Port Out\nStep 2\nPlease remove the red part if already provided Port Out Step 1" }, { "TITLE": "PUK Code", "INFO": "رمز الـ PUK هو XXXX\nونقدر نعرف رمز الـ PUK بكل سهولة عن طريق الإتصال بالرقم 01223204400 من أي موبايل أو تليفون أرضي بسعر الدقيقة العادية من الخط إللي بنتصل منه لاورنچ.\nأو من نفس الرقم نقدر نستعلم عن طريق 400 مجاناً، كمان نقدر نستعلم عن الـ PUK1 الخاص بأي رقم تاني بعد إدخال رمز الحماية الخاص بيه.\nكمان ممكن نحصل على رمز الـ PUK مجاناً عن طريق الكود #100# من خلال قائمة معلومات عن الحساب.\n>> بندخل رمز الـ PUK وبنضغط موافق، هيطلب رقم شخصي جديد، هندخل أي 4 أرقام من إختيارك بس مايكونش فيهم * أو #.\nبعد كده هيطلب تأكيد الرقم مرة تانية، هندخل نفس الـ 4 أرقام، والخط هيشتغل بشكل سليم.\nوطبعاً الـ 4 أرقام دول هيكونوا الرمز الشخصي (الـ PIN) الجديد.", "Description": "PUK Code\nPrivate\nCustomer Verified Or No need For Verification" }, { "TITLE": "Data Dispute", "INFO": "اورنچ بتحدث الأنظمة بشكل مستمر وتأكد إن مش بيكون في أي خصومات من غير سبب.\nاستاذنك نوقف automatic data retrieval من موبايلك ونجرب، لإن ممكن ده يكون سبب إستهلاك الإنترنت.\nوإحنا راجعنا وطريقة المحاسبة مظبوطة والإستهلاك بيكون راجع لإستخدامك حتى لو بنستخدم الإنترنت في التصفح فقط.\nوممكن المراجعة على إستهلاكك من خلال التليفون وهيوضحلك النسب التقريبية إللي تم إستخدامها بالميجابايت ولمعرفة المتبقي من الباقة وللتحكم فيها؛ بيكون من خلال الإتصال مجاناً بـ #136# أو إرسال رسالة لرقم 7455 مكتوب فيها #136# مجاناً.\nوفي أسباب كتير بتأثر على إستهلاك باقة الإنترنت بطريقة سريعة، منها:\n- إتاحة التحديث التلقائي للتطبيقات\n- تحديث الإيميل على الموبايل تلقائياً (Auto sync/Push)\n- تشغيل بيانات في الخلفية للتطبيقات (Background app data)\n- تشغيل التنزيل التلقائي لصور وفيديوهات الواتساب أو تطبيقات المحادثة المماثلة (Media Auto download)\n- إختيار أعلى جودة (HD) لمشاهدة الفيديوهات online زي اليوتيوب أو تشغيل الفيديوهات أوتوماتيك على فيسبوك (ساعة على اليوتيوب على جودة 360 pixels بحوالي 250 ميجا)\n- تشغيل خدمة الـ Hotspot وإستخدام الموبايل كـ مودم Wi-Fi\n- الـ GPS في حالة إعتماده على الموبايل إنترنت\n- في حالة إستخدام خرائط جوجل بطريقة متكررة، يُنصح بتنزيل الخرائط لإستخدامها بدون إنترنت لاحقاً (Download Offline Maps)\n- عند إستخدام الـ Wi-Fi، يُنصح بعدم تشغيل خاصية التبديل بين الشبكات؛ لإستمرار دعم الإتصال بالإنترنت في حالة ضعف الـ Wi-Fi\nوممكن توضيح إحتىاجاتك وإحنا هننصحك بأكتر باقة تكون مناسبة لإستخدامك، وبكده هنكون وفرنا.\nوبشكل عام للتحكم ومتابعة إستهلاك الإنترنت؛ ممكن نستخدم آبلكيشن اورنچ، وإستخدام التطبيق مجاناً، أو من خلال #100#.\nhttps://myo.orange.eg/DB\nوبنقدر نعرف تفاصيل الإستهلاك أخر 30 يوم من خلال آبلكيشن اورنچ", "Description": "Data Dispute\nTo Be Used Any Prepaid، Hybrid and Business C&C" }, { "TITLE": "", "INFO": "اورنچ بتحدث الأنظمة بشكل مستمر وتأكد إن مش بيكون في أي خصومات من غير سبب.\nاستاذنك نوقف automatic data retrieval من موبايلك ونجرب، لإن ممكن ده يكون سبب إستهلاك الإنترنت.\nوإحنا راجعنا وطريقة المحاسبة مظبوطة والإستهلاك بيكون راجع لإستخدامك حتى لو بنستخدم الإنترنت في التصفح فقط.\nوممكن المراجعة على إستهلاكك من خلال التليفون وهيوضحلك النسب التقريبية إللي تم إستخدامها بالميجابايت ولمعرفة المتبقي من الباقة وللتحكم فيها؛ بيكون من خلال الإتصال مجاناً بـ #136# أو إرسال رسالة لرقم 7455 مكتوب فيها #136# مجاناً.\nوبشكل عام للتحكم ومتابعة إستهلاك الإنترنت؛ ممكن نستخدم آبلكيشن اورنچ، وإستخدام التطبيق مجاناً، أو من خلال #100#.\nhttps://myo.orange.eg/DB", "Description": "Data Dispute\nTo Be Used With Postpaid Consumer or Business & Consumer Star Bill\nStep 1" }, { "TITLE": "Data Dispute", "INFO": "في أسباب كتير بتأثر على إستهلاك باقة الإنترنت بطريقة سريعة، منها:\n- إتاحة التحديث التلقائي للتطبيقات\n- تحديث الإيميل على الموبايل تلقائياً (Auto sync/Push)\n- تشغيل بيانات في الخلفية للتطبيقات (Background app data)\n- تشغيل التنزيل التلقائي لصور وفيديوهات الواتساب أو تطبيقات المحادثة المماثلة (Media Auto download)\n- إختيار أعلى جودة (HD) لمشاهدة الفيديوهات online زي اليوتيوب أو تشغيل الفيديوهات أوتوماتيك على فيسبوك (ساعة على اليوتيوب على جودة 360 pixels بحوالي 250 ميجا)\n- تشغيل خدمة الـ Hotspot وإستخدام الموبايل كـ مودم Wi-Fi\n- الـ GPS في حالة إعتماده على الموبايل إنترنت\n- في حالة إستخدام خرائط جوجل بطريقة متكررة، يُنصح بتنزيل الخرائط لإستخدامها بدون إنترنت لاحقاً (Download Offline Maps)\n- عند إستخدام الـ Wi-Fi، يُنصح بعدم تشغيل خاصية التبديل بين الشبكات؛ لإستمرار دعم الإتصال بالإنترنت في حالة ضعف الـ Wi-Fi\nوممكن توضيح إحتىاجاتك وإحنا هننصحك بأكتر باقة تكون مناسبة لإستخدامك، وبكده هنكون وفرنا.\nوبشكل عام للتحكم ومتابعة إستهلاك الإنترنت؛ ممكن نستخدم آبلكيشن اورنچ، وإستخدام التطبيق مجاناً، أو من خلال #100#.\nhttps://myo.orange.eg/DB", "Description": "Data Dispute\nTo Be Used With Postpaid Consumer or Business & Consumer Star Bill\nStep 2\nIn case customer is asking about consumption reasons" }, { "TITLE": "SIM Replacement", "INFO": "الخط تالف يا فندم حضرتك محتاج تشرفنا في فروعنا و تستبدل الشريحة \nممكن نعرف أقرب فرع والمواعيد من هنا https://backend.orange.eg/deeplinkredirect.html?screen=findstore", "Description": "SIM Replacement\nSIM Swap Complaints\n" }, { "TITLE": "SIM Replacement", "INFO": "بنتوجه لأقرب فرع بالبطاقة الشخصية، وبيتم إستبدال الشريحة مقابل 20 جنيه ... ومجاناً لو أول مرة هنستبدل الشريحة القديمة 3G بشريحة جديدة USIM 4G، ولفترة محدودة ممكن نكسب لحد 10 جيجابايتس صالحة لمدة إسبوع هدية من اورنچ.\nوهنحتاج يكون معانا العقد الخاص بالخط، ولو في أي إجراء آخر بيتم توضيحه من خلال الفرع.\nممكن نعرف أقرب فرع والمواعيد من هنا\nhttps://backend.orange.eg/deeplinkredirect.html?screen=findstore", "Description": "SIM Replacement\nSIM Swap Complaints\nIn case line is registered with different data/no data\nSIM swap fees is repriced to be 20 EGP instead of 5 EGP" }, { "TITLE": "New Subscription New Wallet", "INFO": "الإشتراك في الخدمة بيكون من خلال زيارة أقرب فرع بالبطاقة الشخصية وخطك يكون شغال بشكل سليم ومسجل ببياناتك الشخصية ويكون السن 15 سنة أو أكتر، والإشتراك في الخدمة مجاناً وبيكون في ضريبة مطلوب سدادها بقيمة 3.57 جنيه.\nوبنقدر نستخدم الخدمة من خلال اورنچ كاش على تطبيق My Orange أو #7115# أو الخدمة الصوتية.\nبعد الإشتراك هتوصلك رسالة فيها الكود السري، لازم يتم تغيير الكود السري عشان نستخدم الخدمة من خلال #7115# ونيبع الخطوات إللي على القائمة.\nوممكن مراجعة تفاصيل أكتر عن الخدمة من اللينك ده\nhttps://www.orange.eg/ar/services/Orange-financial-services\nممكن نعرف أقرب فرع والمواعيد من هنا\nhttps://backend.orange.eg/deeplinkredirect.html?screen=findstore", "Description": "New Subscription\nNew Wallet\nConsumer Segment" }, { "TITLE": "Cannot Reach 110/250", "INFO": "تم تحديث الخدمة الصوتية وإضافة كل المعلومات إللي محتاجينها وإتاحة التحكم في الخدمات بسهولة عن طريق تطبيق آبلكيشن اورنچ والأكواد #100# والخدمة الصوتية 400، وكمان موقعنا www.orange.eg عشان يتم التحكم في الخط بنفسك في أي وقت بكل سهولة.\nولو في إستفسار، ممكن توضيحه هنا لمساعدتك.", "Description": "Cannot Reach 110/250...etc.\nPrivate\nDon't send e-mail to management anymore." }, { "TITLE": "Customer Service IVR 110", "INFO": "أرقام خدمة العملاء:\n- لخطوط الأفراد: 110 من أي خط اورنچ (تكلفة المكالمة حسب النظام)، أو 16110 من أي خط تاني أو أرضي بسعر الدقيقة الأرضي.\n- لخطوط الشركات: 250 من أي خط اورنچ بيزنس أو 16250 من أي خط تاني أو أرضي، ومواعيد العمل بتكون من 8 صباحاً للساعة 12 صباحاً يومياً.\n- اورنچ كاش: 7770 مجاناً من أي رقم اورنچ فقط على مدار اليوم.\n- اورنچ دي إٍس إل: 16333 من أي خط بسعر الدقيقة للرقم الأرضي.\n- كمان نقدر نتواصل على الواتساب من خلال الرقم 01271002000📱 أو من اللينك ده: https://bit.ly/33FxwC4\n- وممكن نستخدم الشات الخاص بـ آبلكيشن اورنچ.\nولو في أي إستفسار ممكن توضيحه في رسالة وإحنا هنساعدك.", "Description": "Customer Service IVR\nSocial Media\n110 - 250 - 16333 - 7770\nPrivate & Public\nإيه هي أرقام خدمة العملاء؟ \"\"بشكل عام" }, { "TITLE": "Customer Service IVR 111", "INFO": "رقم خدمة عملاء الأفراد: 110 من أي خط اورنچ (تكلفة المكالمة حسب النظام)، أو 16110 من أي خط تاني أو أرضي بسعر الدقيقة الأرضي.\n- كمان نقدر نتواصل على الواتساب من خلال الرقم 01271002000📱 أو من اللينك ده: https://bit.ly/33FxwC4\n- وممكن نستخدم الشات الخاص بـ آبلكيشن اورنچ.\nولو في أي إستفسار ممكن توضيحه في رسالة وإحنا هنساعدك.", "Description": "Customer Service IVR\nSocial Media\n110 - 250 - 16333 - 7770\nOrange CC/Orange Personal" }, { "TITLE": "Customer Service IVR 112", "INFO": "رقم خدمة عملاء الشركات: 250 من أي خط اورنچ بيزنس أو 16250 من أي خط تاني أو أرضي (من 8 ص لـ 12 ص).\n- كمان نقدر نتواصل على الواتساب من خلال الرقم 01271002000📱 أو من اللينك ده: https://bit.ly/33FxwC4\n- وممكن نستخدم الشات الخاص بـ آبلكيشن اورنچ.\nولو في أي إستفسار ممكن توضيحه في رسالة وإحنا هنساعدك.", "Description": "Customer Service IVR\nSocial Media\n110 - 250 - 16333 - 7770\nOrange Business" }, { "TITLE": "Customer Service IVR 113", "INFO": "رقم خدمة عملاء اورنچ دي إٍس إل: 16333 من أي خط بسعر الدقيقة للرقم الأرضي.\n- كمان نقدر نتواصل على الواتساب من خلال الرقم 01271002000📱 أو من اللينك ده: https://bit.ly/33FxwC4\n- وممكن نستخدم الشات الخاص بـ آبلكيشن اورنچ.\nولو في أي إستفسار ممكن توضيحه في رسالة وإحنا هنساعدك.", "Description": "Customer Service IVR\nSocial Media\n110 - 250 - 16333 - 7770\nOrange DSL" }, { "TITLE": "Customer Service IVR 114", "INFO": "رقم خدمة عملاء اورنچ كاش: 7770 من أي خط اورنچ على مدار اليوم.\n- كمان نقدر نتواصل على الواتساب من خلال الرقم 01271002000📱 أو من اللينك ده: https://bit.ly/33FxwC4\n- وممكن نستخدم الشات الخاص بـ آبلكيشن اورنچ.\nولو في أي إستفسار ممكن توضيحه في رسالة وإحنا هنساعدك.", "Description": "Customer Service IVR\nSocial Media\n110 - 250 - 16333 - 7770\nOrange Cash" }, { "TITLE": "Customer Service IVR 115", "INFO": "بنقدر نتواصل مع خدمة عملاء اورنچ كاش على رقم 7770 مجاناً من أي رقم اورنچ فقط على مدار الـ 24 ساعة.\n- كمان نقدر نتواصل على الواتساب من خلال الرقم 01271002000📱 أو من اللينك ده: https://bit.ly/33FxwC4\n- وممكن نستخدم الشات الخاص بـ آبلكيشن اورنچ.\nولو في أي إستفسار ممكن توضيحه في رسالة وإحنا هنساعدك.", "Description": "Customer Service IVR\nSocial Media\n110 - 250 - 16333 - 7770\nNon Orange Customer wants to call Orange Cash Call Center" }, { "TITLE": "Call Tone Deletion", "INFO": "لإلغاء خدمة الكول تون ♬ ممكن نتصل برقم 9999 (سعر الدقيقة 50 قرش ونضغط رقم 9 - 4 - 1)، أو نبعت رسالة لـ 9999 مجاناً فيها كلمة إلغاء أو unsub، أو الكود #155*، أو من خلال تطبيق My Orange، وبيتم الإلغاء فى خلال ساعة.\nوبما إن تكلفتها إتخصمت بالكامل من الرصيد؛ فا كده مش هنتحاسب عليها تاني، إلا إذا كان في أي مبالغ متأخرة من قبل كده لعدم الشحن، فهتتخصم تلقائي من الرصيد عند الشحن.\nوممكن إلغاء بعض خدمات اورنچ عن طريق الكود الموحد #155*", "Description": "Call Tone Deletion\nPrepaid" }, { "TITLE": "WI-FI Calling / Voice over Wi-Fi", "INFO": "الخدمة هتبقى متوفرة قريباً على كل الموديلات المتاح ليها الخدمة.\nمع العلم إن إتاحتها بيرتبط بالشركة المصنعة للتليفون وتحديثها لنظام التشغيل/Software الخاص بها وده لازم يتم قبل طلب الإشتراك فيها.\nوالخدمة نفسها متوفرة، لو معانا حالياً جهاز بيدعمها وشريحتك 4G، نقدر نضيفها من #0123# أو من خلال تطبيق My Orange أو من خلالنا.", "Description": "WI-FI Calling / Voice over Wi-Fi\nFor Eligible Devices not on the shared list or Devices which are Coming Soon\nNo dial Provided / Service not active on line" }, { "TITLE": "Cannot Make Calls Fault For Product", "INFO": "ممكن توضيح هل في رسالة معينة بتظهر على شاشة التليفون أو بنسمعها لما بنحاول نعمل مكالمة؟ ولو في، برجاء توضيحها.\n- هل المشكلة دي بتحصل مع كل الأرقام ولا رقم معين؟\n- نستأذنك نقفل إتصال البيانات وندخل على الضبط وبعدين ضبط الشبكة وبعدين نختار الشبكة يدوي، هيظهر الشبكات المتاحة، ممكن نختار أي شبكة غير اورنچ والتليفون هيرفضها، نرجع نختار شبكة اورنچ ونقفل التليفون ونفتحه، ونجرب إجراء مكالمة.\n- لو إستمرت المشكلة، هنحتاج نجرب الشريحة في تليفون تاني.", "Description": "Cannot Make Calls\nFault For Product" }, { "TITLE": "Cannot Receive Calls", "INFO": "ممكن توضيح هل علامة الشبكة ظاهرة على التليفون كاملة؟\n- المشكلة في إستقبال المكالمات من شبكة معينة ولا من أي حد؟\n- المشكلة بتحصل مع رقم دولي أو أرقام قصيرة؟ ولا بتحصل مع كل الأرقام؟\n- ممكن توضيح الرقم المسلسل للشريحة؟\n- استأذنك نجرب نلغي كل تحويلات المكالمات عن طريق الكود #002##\n- ممكن توضحلنا رسالة الخطأ إللي بيسمعها الشخص إللي بيكلمك؟", "Description": "Cannot Receive Calls" }, { "TITLE": "SMS Troubleshooting\nStep 1", "INFO": "هنحتاج بس نتأكد من شوية خطوات جوه ضبط الرسائل في تليفونك:\n• رقم مركز الرسائل: 00201222000020\n• مركز الرسائل المستخدم: مركز رسائل SIM\n• تقارير التسليم: نعم\n• صلاحية الرسائل: اقصي مدة\n• سترسل الرسالة على شكل: نص\n• الإتصال المفضل: GSM\n• الرد بواسطة نفس المركز: لا\n• ترميز الحروف: دعم كامل\n• إستخدام حزم البيانات: لا\n• المستلم الإفتراضي: غير معرف\n• ولو إستمرت المشكلة، ممكن نجرب الشريحة في تليفون تاني.\nمع العلم إن بعض الخطوات مش موجودة في كل التليفونات، وده على حسب نوع التليفون.", "Description": "SMS Troubleshooting\nStep 1" }, { "TITLE": "SMS Troubleshooting\nIOS iPhone\nStep 1", "INFO": "ممكن نجرب الخطوات دي:\nنتصل بالكود ده:\nCode: *5005*7672*+201222000020# \nوبعدين نتصل بالكود ده:\nCode: *#5005*7672# ", "Description": "SMS Troubleshooting\nIOS iPhone\nStep 1" }, { "TITLE": "SMS Troubleshooting Step 2", "INFO": "ممكن توضيح هل تم إستقبال رسالة من اورنچ بالخطوات التنشيطية لخدمة الرسائل؟", "Description": "SMS Troubleshooting\nStep 2\n• Please send WSMS after troubleshooting based on customer's device. \n• We should ask the customer if s/he received the WSMS or not and state the feedback in SR's note.\n++\nAssign it to the related BO team if needed/if still facing same issue." }, { "TITLE": "Balance inquiry", "INFO": "تم تحديث الخدمة الصوتية وإضافة كل المعلومات إللي محتاجينها وإتاحة التحكم في الخدمات بسهولة عن طريق تطبيق آبلكيشن اورنچ والأكواد #100# والخدمة الصوتية 400، وكمان موقعنا www.orange.eg عشان يتم التحكم في الخط بنفسك في أي وقت بكل سهولة.\nولو في إستفسار، ممكن توضيحه هنا لمساعدتك.", "Description": "Credit inquiries\nBalance inquiry\nPrepaid/Hybrid/Business C&C" }, { "TITLE": "Lost Credit", "INFO": "في أي وقت، نقدر نعرف الرصيد إتخصم في إيه عن طريق رسيني من خلال الكود #13# مجاناً أول مرة في اليوم، وأي رسالة إضافية بـ 10 قروش، وهتوصلك رسالة بتقرير يوضح رصيدك وإستهلاكك والإشتراكات إللي إتخصمت في أخر 24 ساعة (هنقدر نستخدمها بعد ساعة من عملية الشحن).\nوكمان نقدر نستخدم خدمة رسيني على تطبيق My Orange مجاناً أي عدد من المرات خلال اليوم.\nالخدمة متاحة لأنظمة الكارت فقط.\nوبنقدر نعرف تفاصيل الإستهلاك أخر 30 يوم من خلال تطبيق My Orange\nhttps://myo.orange.eg/my-consumption", "Description": "Lost Credit\nRasseny\nMy Orange – Prepaid E-bill\nPrepaid\nBusiness Prepaid dials are eligible to use the service." }, { "TITLE": "Lost Credit", "INFO": "في أي وقت، نقدر نعرف تفاصيل الإستهلاك أخر 30 يوم ونراجع الرصيد والأرقام إللي كلمناها من خلال تطبيق My Orange مجاناً ومش بيستهلك من الإنترنت إلا عند تحميل التطبيق أو التوجه لصفحات خارج التطبيق ... وده أسهل وكمان بيحافظ على سرية الخط.\nوبنقدر نعرف تفاصيل الإستهلاك أخر 30 يوم من خلال تطبيق My Orange\nhttps://myo.orange.eg/my-consumption", "Description": "Lost Credit\nMy Orange – Prepaid E-bill\nHybrid" }, { "TITLE": "(Chunk Quota)", "INFO": "دي الطريقة المتبعة لحساب إستخدام الإنترنت. بمجرد ما بندخل على موقع، بيتم حجز عدد من الميجابيتس لغاية ما بتخلص. أول ما بتخلص، بيتم خصم فقط الميجابيتس إللي تم إستخدامتها وبيرجعلك الباقي. وعشان نقدر نستخدم الإنترنت مرة تانية ونستفيد من باقي الميجابيتس المحجوزة لازم نقفل جميع المواقع إللي تم تصفحها وده بيكون من خلال إيقاف الجهاز وإعادة تشغيله تاني أو تشغيل وضع الطائرة (flight mode or the airplane mode) ثم إيقافه مره تانية. وده معناه إن مفيش أي ميجابيتس بتروح.", "Description": "Reserved Quota\n(Chunk Quota)" }];
+
+            let vasItems = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+            if (!vasItems) {
+                // Seed from JSON on first load, assign unique IDs
+                vasItems = VAS_JSON
+                    .filter(v => v.TITLE && v.TITLE.trim())
+                    .map((v, i) => ({
+                        id: 'vas_' + Date.now() + '_' + i,
+                        title: v.TITLE.trim(),
+                        info: v.INFO,
+                        description: v.Description || '',
+                    }));
+                save();
+            }
+
+            function save() {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(vasItems));
+                render();
+            }
+
+            // ── Helpers ──────────────────────────────────────────────────
+            function esc(s) {
+                return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            }
+
+            // Extract first word of title as category key
+            function getCategory(title) {
+                const first = title.split(/[\s\n]/)[0];
+                return first || 'Other';
+            }
+
+            // ── Toast ────────────────────────────────────────────────────
+            let toastTimer;
+            function showToast(msg, color = 'var(--success)') {
+                const t = $('toast'); const m = $('toastMsg');
+                m.textContent = msg;
+                t.style.borderLeftColor = color;
+                t.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+            }
+
+            // ── Category Pills ───────────────────────────────────────────
+            let selectedCat = 'all';
+
+            function rebuildPills() {
+                const cats = ['all', ...new Set(vasItems.map(v => getCategory(v.title)))].sort((a, b) => a === 'all' ? -1 : b === 'all' ? 1 : a.localeCompare(b));
+                $('categoryPills').innerHTML = cats.map(c => `
+            <span class="category-pill ${selectedCat === c ? 'active' : ''}" data-cat="${esc(c)}">
+                ${c === 'all' ? 'All' : esc(c)}
+            </span>
+        `).join('');
+                document.querySelectorAll('.category-pill').forEach(p => {
+                    p.addEventListener('click', () => { selectedCat = p.dataset.cat; render(); });
+                });
+            }
+
+            // ── Render ───────────────────────────────────────────────────
+            function render() {
+                const term = ($('searchInput').value || '').trim().toLowerCase();
+                let filtered = vasItems.filter(v => {
+                    const matchSearch = !term || v.title.toLowerCase().includes(term) || v.info.toLowerCase().includes(term) || v.description.toLowerCase().includes(term);
+                    const matchCat = selectedCat === 'all' || getCategory(v.title) === selectedCat;
+                    return matchSearch && matchCat;
+                });
+
+                $('totalVas').textContent = vasItems.length;
+
+                const container = $('vasContainer');
+                if (filtered.length === 0) {
+                    container.innerHTML = `
+                <div class="empty-state">
+                    <div style="font-size:3rem">🔍</div>
+                    <h3>Nothing found…</h3>
+                    <p>Try different keywords.</p>
+                    <button class="btn" onclick="document.getElementById('searchInput').value='';document.getElementById('searchInput').dispatchEvent(new Event('input'))">Clear search</button>
+                </div>`;
+                } else {
+                    container.innerHTML = filtered.map((v, i) => `
+                <div class="vas-card" data-id="${v.id}" style="animation-delay:${i * 0.03}s">
+                    <div class="copy-flash"></div>
+                    <div class="vas-title">${esc(v.title)}</div>
+                    <div class="vas-info-preview">${esc(v.info)}</div>
+                    <div class="vas-card-bottom">
+                        <span class="vas-copy-hint"><i class="fas fa-hand-pointer"></i> click to copy</span>
+                    </div>
+                    ${v.description ? `<div class="vas-tooltip">${esc(v.description)}</div>` : ''}
+                </div>
+            `).join('');
+                }
+
+                rebuildPills();
+            }
+
+            // ── Copy ─────────────────────────────────────────────────────
+            async function handleCopy(id) {
+                const v = vasItems.find(v => v.id === id);
+                if (!v) return;
+                try {
+                    await navigator.clipboard.writeText(v.info);
+                    showToast('Copied!');
+                    const card = document.querySelector(`.vas-card[data-id="${id}"]`);
+                    if (card) { card.classList.remove('copied'); void card.offsetWidth; card.classList.add('copied'); setTimeout(() => card.classList.remove('copied'), 600); }
+                } catch { showToast('Copy failed!', 'var(--danger)'); }
+            }
+
+            // ── Click ─────────────────────────────────────────────────────
+            document.addEventListener('click', e => {
+                hideCtxMenu();
+                const card = e.target.closest('.vas-card');
+                if (card) handleCopy(card.dataset.id);
+            });
+
+            // ── Context Menu ──────────────────────────────────────────────
+            const ctxMenu = $('ctxMenu');
+            let ctxTargetId = null;
+
+            function hideCtxMenu() { ctxMenu.classList.remove('open'); }
+
+            document.addEventListener('contextmenu', e => {
+                const card = e.target.closest('.vas-card');
+                if (!card) return;
+                e.preventDefault();
+                ctxTargetId = card.dataset.id;
+                ctxMenu.style.left = Math.min(e.clientX, window.innerWidth - 185) + 'px';
+                ctxMenu.style.top = Math.min(e.clientY, window.innerHeight - 120) + 'px';
+                ctxMenu.classList.add('open');
+            });
+
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') hideCtxMenu(); });
+
+            $('ctxCopy').addEventListener('click', () => { handleCopy(ctxTargetId); hideCtxMenu(); });
+            $('ctxDelete').addEventListener('click', () => { showDeleteConfirm(ctxTargetId); hideCtxMenu(); });
+
+            // ── Delete Confirm ────────────────────────────────────────────
+            function showDeleteConfirm(id) {
+                const v = vasItems.find(v => v.id === id);
+                if (!v) return;
+                const m = document.createElement('div');
+                m.className = 'modal-overlay';
+                m.innerHTML = `
+            <div class="modal delete-modal">
+                <div class="delete-icon">🗑️</div>
+                <h3>Delete item?</h3>
+                <p class="delete-title">"${esc(v.title)}"</p>
+                <p class="delete-warning">This action cannot be undone.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-cancel-d">Cancel</button>
+                    <button class="btn btn-danger btn-confirm-d">Delete</button>
+                </div>
+            </div>`;
+                document.body.appendChild(m);
+                m.classList.add('show');
+
+                const close = () => { m.classList.remove('show'); setTimeout(() => m.remove(), 150); };
+                m.querySelector('.btn-cancel-d').addEventListener('click', close);
+                m.querySelector('.btn-confirm-d').addEventListener('click', () => {
+                    vasItems = vasItems.filter(v => v.id !== id);
+                    save(); close();
+                    showToast('Deleted', 'var(--danger)');
+                });
+                m.addEventListener('click', e => { if (e.target === m) close(); });
+            }
+
+            // ── Search ────────────────────────────────────────────────────
+            $('searchInput').addEventListener('input', render);
+            $('clearSearch').addEventListener('click', () => { $('searchInput').value = ''; render(); $('searchInput').focus(); });
+            document.addEventListener('keydown', e => {
+                if (e.ctrlKey && e.key === 'f') { e.preventDefault(); $('searchInput').focus(); $('searchInput').select(); }
+            });
+
+            // ── Init ──────────────────────────────────────────────────────
+            render();
+
+        })();
+    </script>
 </body>
 
 </html>
